@@ -1,5 +1,7 @@
 const std = @import("std");
 
+pub const MBBool = u8;
+
 pub const ClearColor = extern struct {
     r: f64 = 0,
     g: f64 = 0,
@@ -59,6 +61,10 @@ pub const Texture = extern struct {
     texture: *anyopaque,
 };
 
+pub const TextureDescriptor = extern struct {
+    desc: *anyopaque,
+};
+
 pub const Drawable = *anyopaque;
 
 pub extern fn deviceInit(self: *Device) c_int;
@@ -69,6 +75,7 @@ pub extern fn deviceNewDefaultLibrary(self: *Device, out: *Library) c_int;
 pub extern fn deviceNewBufferWithLength(self: *Device, length: usize, out: *Buffer) c_int;
 pub extern fn deviceNewBufferWithBytes(self: *Device, bytes: *const anyopaque, length: usize, out: *Buffer) c_int;
 pub extern fn deviceNewRenderPipelineStateWithDescriptor(self: *Device, desc: *RenderPipelineDescriptor, out: *RenderPipelineState) c_int;
+pub extern fn deviceNewTextureWithDescriptor(self: *Device, desc: *TextureDescriptor, out: *Texture) c_int;
 
 pub extern fn renderPipelineDescriptorInit(self: *RenderPipelineDescriptor) c_int;
 pub extern fn renderPipelineDescriptorDenit(self: *RenderPipelineDescriptor) void;
@@ -116,6 +123,12 @@ pub extern fn renderCommandEncoderDrawPrimitives(self: *RenderCommandEncoder, pr
 pub extern fn renderCommandEncoderDrawIndexedPrimitives(self: *RenderCommandEncoder, primitive_type: u64, index: u64, count: u64, index_type: u64, index_buffer: *Buffer, index_buffer_offset: u64) void;
 pub extern fn renderCommandEncoderSetFragmentTexture(self: *RenderCommandEncoder, texture: Texture, index: u64) void;
 pub extern fn renderCommandEncoderEndEncoding(self: *RenderCommandEncoder) void;
+
+pub extern fn textureDescriptorInit(self: *TextureDescriptor) c_int;
+pub extern fn textureDescriptorInit2DWithPixelFormat(self: *TextureDescriptor, format: u64, width: u64, height: u64, mipmapped: MBBool) c_int;
+pub extern fn textureDescriptorDeinit(self: *TextureDescriptor) void;
+
+pub extern fn textureDeinit(self: *Texture) void;
 
 pub const MBOK: c_int = 0;
 pub const MBERR: c_int = 1;

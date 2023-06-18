@@ -12,6 +12,8 @@ pub const Error = error{
     NewVertexDescriptor,
     NewCommandBuffer,
     NewRenderCommandEncoder,
+    NewTetureDescriptor,
+    NewTexture,
 };
 
 pub const VertexStepFunction = enum(u64) {
@@ -198,6 +200,16 @@ pub const Device = struct {
         }
 
         return state;
+    }
+
+    pub fn newTextureWithDescriptor(self: *Device, desc: *TextureDescriptor) Error!Texture {
+        var texture = Texture{};
+
+        if (c.deviceNewTextureWithDescriptor(&self.device, &desc, &texture.texture) != c.MBOK) {
+            return Error.NewTexture;
+        }
+
+        return texture;
     }
 };
 
@@ -458,4 +470,43 @@ pub const RenderCommandEncoder = struct {
 
 pub const Texture = struct {
     texture: c.Texture = undefined,
+
+    pub fn deinit(self: *Texture) void {
+        c.textureDeinit(&self.texture);
+    }
+};
+
+pub const TextureDescriptor = struct {
+    desc: c.TextureDescriptor = undefined,
+
+    const Self = @This();
+    pub fn init() Error!Self {
+        var self = TextureDescriptor{};
+
+        if (c.textureDescriptorInit(&self.desc) != c.MBOK) {
+            return Error.NewTetureDescriptor;
+        }
+
+        return self;
+    }
+
+    pub fn init2DWithPixelFormat(format: PixelFormat, width: usize, height: usize, mipmapped: bool) Error!Self {
+        var self = TextureDescriptor{};
+
+        if (c.textureDescriptorInit2DWithPixelFormat(
+            &self.desc,
+            @enumToInt(format),
+            @intCast(u64, width),
+            @intCast(u64, height),
+            @intCast(u8, @boolToInt(mipmapped)),
+        ) != c.MBOK) {
+            return Error.NewTetureDescriptor;
+        }
+
+        return self;
+    }
+
+    pub fn deinit(self: *Self) void {
+        c.textureDescriptorDeinit(&self.desc);
+    }
 };

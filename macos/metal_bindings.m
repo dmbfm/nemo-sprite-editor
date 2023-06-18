@@ -110,6 +110,17 @@ int deviceNewRenderPipelineStateWithDescriptor(Device *self, RenderPipelineDescr
     return MB_OK;
 }
 
+
+int deviceNewTextureWithDescriptor(Device *self, TextureDescriptor *desc, Texture *out) {
+    out->texture = [self->device newTextureWithDescriptor:desc->desc];
+    if (out->texture == nil) {
+        return MB_ERR;
+    }
+
+    [out->texture retain];
+    return MB_OK;
+}
+
 int libraryNewFunctionWithName(Library * self, const char *name, Function *out) {
     id<MTLFunction> func = [self->library newFunctionWithName:[NSString stringWithUTF8String:name]];
 
@@ -155,6 +166,8 @@ int vertexDescriptorInit(VertexDescriptor *self) {
         return MB_ERR;
     }
 
+    [self->desc retain];
+
     return MB_OK;
 }
 
@@ -196,6 +209,7 @@ int renderPipelineDescriptorInit(RenderPipelineDescriptor *self) {
         return MB_ERR;
     }
 
+    [self->desc retain];
     return MB_OK;
 }
 
@@ -312,4 +326,41 @@ void renderCommandEncoderDrawIndexedPrimitives(RenderCommandEncoder *self, uint6
 
 void renderCommandEncoderSetFragmentTexture(RenderCommandEncoder *self, Texture texture, uint64_t index) {
     [self->encoder setFragmentTexture:texture.texture atIndex:index];
+}
+
+
+int textureDescriptorInit(TextureDescriptor *self) {
+    self->desc = [[MTLTextureDescriptor alloc] init];
+
+    if (self->desc == nil) {
+        return MB_ERR;
+    }
+
+    [self->desc retain];
+    return MB_OK;
+}
+
+void textureDescriptorDeinit(TextureDescriptor *self) {
+    if (self->desc) {
+        [self->desc release];
+    }
+}
+
+int textureDescriptorInit2DWithPixelFormat(TextureDescriptor *self, uint64_t format, uint64_t width, uint64_t height, MBBool mipmapped) {
+    self->desc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:format 
+                                                                    width:width 
+                                                                   height:height 
+                                                                mipmapped: (mipmapped != MB_FALSE)];
+    if (self->desc == nil) {
+        return MB_ERR;
+    }
+
+    [self->desc retain];
+    return MB_OK;
+}
+
+void textureDeinit(Texture *self) {
+    if (self->texture) {
+        [self->texture release];
+    }
 }

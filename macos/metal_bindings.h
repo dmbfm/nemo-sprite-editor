@@ -20,6 +20,11 @@
 #define MB_MAX_ARG_BUFFERS 31
 #define MB_MAX_RENDER_TARGETS 8
 
+typedef uint8_t MBBool;
+
+#define MB_TRUE   ((MBBool) 1) 
+#define MB_FALSE  ((MBBool) 0)
+
 /*******************************************************************************
  * Struct definitions
  ******************************************************************************/
@@ -92,6 +97,7 @@ int deviceNewBufferWithLength(Device *self, size_t length, Buffer *out);
 int deviceNewBufferWithBytes(Device *self, const void *bytes, size_t length, Buffer *out);
 int deviceNewRenderPipelineStateWithDescriptor(Device *self, RenderPipelineDescriptor *desc, RenderPipelineState *out);
 int deviceGetName(Device *self, char *out, size_t max_len);
+int deviceNewTextureWithDescriptor(Device *self, TextureDescriptor *desc, Texture *out);
 
 /*******************************************************************************
  * MTLLibrary
@@ -180,5 +186,15 @@ void renderCommandEncoderEndEncoding(RenderCommandEncoder *self);
 /*******************************************************************************
  * MTLTextureDescriptor
  ******************************************************************************/
+
+int textureDescriptorInit(TextureDescriptor *self);
+int textureDescriptorInit2DWithPixelFormat(TextureDescriptor *self, uint64_t format, uint64_t width,uint64_t height, MBBool mipmapped);
+void textureDescriptorDeinit(TextureDescriptor *self);
+
+/*******************************************************************************
+ * MTLTexture
+ ******************************************************************************/
+
+void textureDeinit(Texture *self);
 
 #endif /* metal_bindings_h */
