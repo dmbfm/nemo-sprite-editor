@@ -113,3 +113,135 @@ void CommandBuffer_setLabel(CommandBuffer self, const char *label) {
     [(id<MTLCommandBuffer>) self setLabel:[NSString stringWithUTF8String:label]];
 }
 
+RenderCommandEncoder CommandBuffer_renderCommandEncoderWithDescriptor(CommandBuffer self, RenderPassDescriptor desc) {
+    id<MTLRenderCommandEncoder> r = [(id<MTLCommandBuffer>)self renderCommandEncoderWithDescriptor:(MTLRenderPassDescriptor *)desc];
+    // Dont't retain command encoders
+    //RETURN_RETAIN(r);
+    return r;
+}
+
+/******************************************************************************
+ * MTLRenderPipelineDescriptor
+ ******************************************************************************/
+
+RenderPipelineDescriptor RenderPipelineDescriptor_init() {
+    MTLRenderPipelineDescriptor *desc = [[MTLRenderPipelineDescriptor alloc] init];
+    RETURN_RETAIN(desc);
+}
+
+void RenderPipelineDescriptor_setLabel(RenderPipelineDescriptor self, const char *label) {
+    [(MTLRenderPipelineDescriptor *) self setLabel:[NSString stringWithUTF8String:label]];
+}
+
+void RenderPipelineDescriptor_reset(RenderPipelineDescriptor self) {
+    [(MTLRenderPipelineDescriptor *) self reset];
+}
+
+void RenderPipelineDescriptor_setVertexFunction(RenderPipelineDescriptor self, Function value) {
+    [(MTLRenderPipelineDescriptor *) self setVertexFunction:(id<MTLFunction>) value];
+}
+
+void RenderPipelineDescriptor_setFragmentFunction(RenderPipelineDescriptor self, Function value) {
+    [(MTLRenderPipelineDescriptor *) self setFragmentFunction:(id<MTLFunction>) value];
+}
+
+void RenderPipelineDescriptor_setVertexDescriptor(RenderPipelineDescriptor self, VertexDescriptor value) {
+    [(MTLRenderPipelineDescriptor *) self setVertexDescriptor:(MTLVertexDescriptor *)value];
+}
+
+void RenderPipelineDescriptor_setVertexBufferMultability(RenderPipelineDescriptor self, int index, MBEnum multability) {
+    ((MTLRenderPipelineDescriptor *)self).vertexBuffers[index].mutability = multability;
+}
+
+void RenderPipelineDescriptor_setFragmentBufferMultability(RenderPipelineDescriptor self, int index, MBEnum multability) {
+    ((MTLRenderPipelineDescriptor *)self).fragmentBuffers[index].mutability = multability;
+}
+
+void RenderPipelineDescriptor_setColorAttachmentPixelFormat(RenderPipelineDescriptor self, int index, MBEnum value) {
+    ((MTLRenderPipelineDescriptor *) self).colorAttachments[index].pixelFormat = value;
+}
+
+void RenderPipelineDescriptor_setColorAttachmentWriteMask(RenderPipelineDescriptor self, int index, MBEnum value) {
+    ((MTLRenderPipelineDescriptor *) self).colorAttachments[index].writeMask = value;
+}
+
+void RenderPipelineDescriptor_setColorAttachmentBlendingEnabled(RenderPipelineDescriptor self, int index, MBBool value) {
+    ((MTLRenderPipelineDescriptor *) self).colorAttachments[index].blendingEnabled = value;
+}
+
+void RenderPipelineDescriptor_setColorAttachmentAlphaBlendOperation(RenderPipelineDescriptor self, int index, MBEnum value) {
+    ((MTLRenderPipelineDescriptor *) self).colorAttachments[index].alphaBlendOperation = value;
+}
+
+void RenderPipelineDescriptor_setColorAttachmentRgbBlendOperation(RenderPipelineDescriptor self, int index, MBEnum value) {
+    ((MTLRenderPipelineDescriptor *) self).colorAttachments[index].rgbBlendOperation = value;
+}
+
+void RenderPipelineDescriptor_setColorAttachmentDestinationAlphaBlendFactor(RenderPipelineDescriptor self, int index, MBEnum value) {
+    ((MTLRenderPipelineDescriptor *) self).colorAttachments[index].destinationAlphaBlendFactor = value;
+}
+
+void RenderPipelineDescriptor_setColorAttachmentDestinationRgbBlendFactor(RenderPipelineDescriptor self, int index, MBEnum value) {
+    ((MTLRenderPipelineDescriptor *) self).colorAttachments[index].destinationRGBBlendFactor = value;
+}
+
+void RenderPipelineDescriptor_setColorAttachmentSourceAlphaBlendFactor(RenderPipelineDescriptor self, int index, MBEnum value) {
+    ((MTLRenderPipelineDescriptor *) self).colorAttachments[index].sourceAlphaBlendFactor = value;
+}
+
+void RenderPipelineDescriptor_setColorAttachmentSourceRgbBlendFactor(RenderPipelineDescriptor self, int index, MBEnum value) {
+    ((MTLRenderPipelineDescriptor *) self).colorAttachments[index].sourceRGBBlendFactor = value;
+}
+
+void RenderPipelineDescriptor_setDepthAttachmentPixelFormat(RenderPipelineDescriptor self, int index, MBEnum value) {
+    ((MTLRenderPipelineDescriptor *) self).depthAttachmentPixelFormat = value;
+}
+
+void RenderPipelineDescriptor_setStencilAttachmentPixelFormat(RenderPipelineDescriptor self, int index, MBEnum value) {
+    ((MTLRenderPipelineDescriptor *) self).stencilAttachmentPixelFormat = value;
+}
+
+/******************************************************************************
+ * MTLRenderPassDescriptor
+ ******************************************************************************/
+
+RenderPassDescriptor RenderPassDescriptor_init() {
+    MTLRenderPassDescriptor *desc = [[MTLRenderPassDescriptor alloc] init];
+    RETURN_RETAIN(desc);
+}
+
+void RenderPassDescriptor_setColorAttachmentClearColor(RenderPassDescriptor self, int index, ClearColor val) {
+    ((MTLRenderPassDescriptor *) self).colorAttachments[index].clearColor = 
+        MTLClearColorMake(val.r, val.g, val.b, val.a);
+}
+
+void RenderPassDescriptor_setDepthAttachmentClearDepth(RenderPassDescriptor self, double value) {
+    ((MTLRenderPassDescriptor *)self).depthAttachment.clearDepth = value;
+}
+
+void RenderPassDescriptor_setStencilAttachmentClearStencil(RenderPassDescriptor self, double value) {
+    ((MTLRenderPassDescriptor *)self).stencilAttachment.clearStencil = value;
+}
+
+void RenderPassDescriptor_setColorAttachmentTexture(RenderPassDescriptor self, int index, Texture val) {
+    ((MTLRenderPassDescriptor *)self).colorAttachments[index].texture = val;
+}
+
+void RenderPassDescriptor_setColorAttachmentLevel(RenderPassDescriptor self, int index, uint64_t val) {
+    ((MTLRenderPassDescriptor *)self).colorAttachments[index].level = val;
+}
+
+void RenderPassDescriptor_setColorAttachmentSlice(RenderPassDescriptor self, int index, uint64_t val) {
+    ((MTLRenderPassDescriptor *)self).colorAttachments[index].slice = val;
+}
+
+void RenderPassDescriptor_setColorAttachmentLoadAction(RenderPassDescriptor self, int index, MBEnum val) {
+    ((MTLRenderPassDescriptor *)self).colorAttachments[index].loadAction = val;
+}
+
+void RenderPassDescriptor_setColorAttachmentStoreaction(RenderPassDescriptor self, int index, MBEnum val) {
+    ((MTLRenderPassDescriptor *)self).colorAttachments[index].storeAction = val;
+}
+
+
+
