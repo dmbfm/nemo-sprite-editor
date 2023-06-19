@@ -9,14 +9,14 @@ pub const Device = opaque {
         NewCommandQueue,
     };
 
-    extern fn deviceInit() ?*Device;
-    extern fn deviceDeinit(self: *Device) void;
-    extern fn deviceGetName(self: *Device, out: [*c]u8, max_len: usize) c_int;
-    extern fn deviceNewTextureWithDescriptor(self: *Device, desc: *TextureDescriptor) ?*Texture;
-    extern fn deviceNewCommandQueue(self: *Device) ?*CommandQueue;
+    extern fn Device_init() ?*Device;
+    extern fn release(self: *Device) void;
+    extern fn Device_getName(self: *Device, out: [*c]u8, max_len: usize) c_int;
+    extern fn Device_newTextureWithDescriptor(self: *Device, desc: *TextureDescriptor) ?*Texture;
+    extern fn Device_newCommandQueue(self: *Device) ?*CommandQueue;
 
     pub fn init() Error!*Device {
-        var device = deviceInit();
+        var device = Device_init();
 
         if (device == null) {
             return Error.DeviceInitError;
@@ -26,16 +26,16 @@ pub const Device = opaque {
     }
 
     pub fn deinit(self: *Device) void {
-        deviceDeinit(self);
+        release(self);
     }
 
     pub fn name(self: *Device, buffer: []u8) []u8 {
-        var len = deviceGetName(self, buffer.ptr, buffer.len);
+        var len = Device_getName(self, buffer.ptr, buffer.len);
         return buffer[0..@intCast(usize, len)];
     }
 
     pub fn newCommandQueue(self: *Device) Error!*CommandQueue {
-        var queue = deviceNewCommandQueue(self);
+        var queue = Device_newCommandQueue(self);
 
         if (queue == null) {
             return Error.NewCommandQueue;
@@ -45,7 +45,7 @@ pub const Device = opaque {
     }
 
     pub fn newTextureWithDescriptor(self: *Device, desc: *TextureDescriptor) Error!*Texture {
-        var tex = deviceNewTextureWithDescriptor(self, desc);
+        var tex = Device_newTextureWithDescriptor(self, desc);
         if (tex == null) {
             return Error.NewTextureError;
         }

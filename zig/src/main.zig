@@ -6,7 +6,7 @@ const MetalViewContext = opaque {};
 
 const Nemo = struct {
     device: *mtl.Device = undefined,
-    //command_queue: mtl.CommandQueue = undefined,
+    command_queue: *mtl.CommandQueue = undefined,
     //library: mtl.Library = undefined,
     //buffer: mtl.Buffer = undefined,
     //render_pipeline_state: mtl.RenderPipelineState = undefined,
@@ -21,6 +21,12 @@ const Nemo = struct {
 
         //self.device = try mtl.Device.init();
         std.log.info("device = {s}", .{name});
+
+        self.command_queue = try self.device.newCommandQueue();
+        defer self.command_queue.deinit();
+
+        var command_buffer = try self.command_queue.commandBuffer();
+        defer command_buffer.deinit();
 
         //self.command_queue = try self.device.newCommandQueue();
         //self.command_queue.setLabel("Main Command Queue");
