@@ -61,6 +61,23 @@ typedef struct MB_ScissorRect {
     double h;
 } MB_ScissorRect;
 
+typedef struct MB_Origin {
+    uint64_t x;
+    uint64_t y;
+    uint64_t z;
+} MB_Origin;
+
+typedef struct MB_Size {
+    uint64_t width;
+    uint64_t height;
+    uint64_t depth;
+} MB_Size;
+
+typedef struct MB_Region {
+    MB_Origin origin;
+    MB_Size size;
+} MB_Region;
+
 /******************************************************************************
  * MTLDevice
  ******************************************************************************/
@@ -91,10 +108,10 @@ void                 CommandBuffer_setLabel(CommandBuffer self, const char *labe
 RenderCommandEncoder CommandBuffer_renderCommandEncoderWithDescriptor(CommandBuffer self, RenderPassDescriptor desc);
 
 /******************************************************************************
- * MTLRenderPipeline
+ * MTLRenderPipelineDescriptor
  ******************************************************************************/
 
-RenderPipelineDescriptor RenderPipelineDescriptor_init();
+RenderPipelineDescriptor RenderPipelineDescriptor_init(void);
 void RenderPipelineDescriptor_setLabel(RenderPipelineDescriptor self, const char *label);
 void RenderPipelineDescriptor_reset(RenderPipelineDescriptor self);
 void RenderPipelineDescriptor_setVertexFunction(RenderPipelineDescriptor self, Function value);
@@ -120,7 +137,7 @@ void RenderPipelineDescriptor_setStencilAttachmentPixelFormat(RenderPipelineDesc
  ******************************************************************************/
 
 
-RenderPassDescriptor RenderPassDescriptor_init();
+RenderPassDescriptor RenderPassDescriptor_init(void);
 void RenderPassDescriptor_setColorAttachmentClearColor(RenderPassDescriptor self, int index, ClearColor val);
 
 void RenderPassDescriptor_setColorAttachmentTexture(RenderPassDescriptor self, int index, Texture val);
@@ -128,7 +145,6 @@ void RenderPassDescriptor_setColorAttachmentLevel(RenderPassDescriptor self, int
 void RenderPassDescriptor_setColorAttachmentSlice(RenderPassDescriptor self, int index, uint64_t val);
 void RenderPassDescriptor_setColorAttachmentLoadAction(RenderPassDescriptor self, int index, MBEnum val);
 void RenderPassDescriptor_setColorAttachmentStoreaction(RenderPassDescriptor self, int index, MBEnum val);
-
 void RenderPassDescriptor_setDepthAttachmentClearDepth(RenderPassDescriptor self, double value);
 void RenderPassDescriptor_setStencilAttachmentClearStencil(RenderPassDescriptor self, double value);
 
@@ -145,7 +161,59 @@ void RenderCommandEncoder_setViewport(RenderCommandEncoder self, MB_Viewport val
 void RenderCommandEncoder_setScissorRect(RenderCommandEncoder self, MB_ScissorRect val);
 void RenderCommandEncoder_setBlendColor(RenderCommandEncoder self, float r, float g, float b, float a);
 void RenderCommandEncoder_setVertexBuffer(RenderCommandEncoder self, Buffer buffer, uint64_t offset, uint64_t index);
+void RenderCommandEncoder_setVertexBytes(RenderCommandEncoder self, const void *bytes, uint64_t length, uint64_t index);
 
+/******************************************************************************
+ * MTLBuffer
+ ******************************************************************************/
+
+void* Buffer_contents(Buffer self);
+
+
+/******************************************************************************
+ * MTLVertexDescriptor
+ ******************************************************************************/
+
+VertexDescriptor VertexDescriptor_init(void);
+void VertexDescriptor_reset(VertexDescriptor self);
+void VertexDescriptor_setAttributeFormat(VertexDescriptor self, int index, MBEnum value);
+void VertexDescriptor_setAttributeOffet(VertexDescriptor self, int index, uint64_t value);
+void VertexDescriptor_setAttributeBufferIndex(VertexDescriptor self, int index, uint64_t value);
+void VertexDescriptor_setLayoutStride(VertexDescriptor self, int index, uint64_t value);
+void VertexDescriptor_setLayoutStepFunction(VertexDescriptor self, int index, MBEnum value);
+void VertexDescriptor_setLayoutStepRate(VertexDescriptor self, int index, uint64_t value);
+
+/******************************************************************************
+ * MTLTextureDescriptor
+ ******************************************************************************/
+
+TextureDescriptor TextureDescriptor_init(void);
+TextureDescriptor TextureDescriptor_texture2DDescriptorWithPixelFormat(MBEnum pixel_format, uint64_t width, uint64_t height, MBBool mipmapped);
+void              TextureDescriptor_setPixelFormat(TextureDescriptor self, MBEnum value);
+void              TextureDescriptor_setWidth(TextureDescriptor self, uint64_t value);
+void              TextureDescriptor_setHeight(TextureDescriptor self, uint64_t value);
+void              TextureDescriptor_setMipmapLevelCount(TextureDescriptor self, uint64_t value);
+void              TextureDescriptor_setCpuCacheMode(TextureDescriptor self, MBEnum value);
+void              TextureDescriptor_setStorageMode(TextureDescriptor self, MBEnum value);
+
+
+/******************************************************************************
+ * MTLTexture
+ ******************************************************************************/
+
+void Texture_replaceRegion(Texture self, MB_Region region, uint64_t mipmap_level, const void *bytes, uint64_t bytes_per_row);
+void Texture_replaceRegionSlice(Texture self, MB_Region region, uint64_t mipmap_level, uint64_t slice, const void *bytes, uint64_t bytes_per_row, uint64_t bytes_per_image);
+void Texture_getBytes(Texture self, void *out, uint64_t bytes_per_row, MB_Region region, uint64_t mipmap_level);
+void Texture_getBytesSlice(Texture self, void *out, uint64_t bytes_per_row, uint64_t bytes_per_image, MB_Region region, uint64_t mipmap_level, uint64_t slice);
+Texture Texture_newTextureWithFormat(Texture self, MBEnum format);
+uint64_t Texture_width(Texture self);
+uint64_t Texture_height(Texture self);
+
+/******************************************************************************
+ * MTLLibrary
+ ******************************************************************************/
+
+Function Library_newFunctionWithName(Library self, const char *name);
 
 
 
