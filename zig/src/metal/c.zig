@@ -2,6 +2,13 @@ const std = @import("std");
 
 pub const MBBool = u8;
 
+pub const NSRect = extern struct {
+    x: f64 = 0,
+    y: f64 = 0,
+    w: f64 = 0,
+    h: f64 = 0,
+};
+
 pub const ClearColor = extern struct {
     r: f64 = 0,
     g: f64 = 0,

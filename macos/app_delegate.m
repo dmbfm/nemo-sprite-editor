@@ -5,7 +5,7 @@
 //  Created by Daniel Fortes on 18/06/23.
 //
 
-#import "AppDelegate.h"
+#import "app_delegate.h"
 
 @interface AppDelegate ()
 
@@ -16,6 +16,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
+    
+    
 }
 
 
@@ -23,8 +25,7 @@
     // Insert code here to tear down your application
 }
 
-
-- (BOOL)applicationSupportsSecureRestorableState:(NSApplication *)app {
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
     return YES;
 }
 
