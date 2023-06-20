@@ -166,7 +166,7 @@ void RenderPipelineDescriptor_setColorAttachmentWriteMask(RenderPipelineDescript
 }
 
 void RenderPipelineDescriptor_setColorAttachmentBlendingEnabled(RenderPipelineDescriptor self, int index, MBBool value) {
-    ((MTLRenderPipelineDescriptor *) self).colorAttachments[index].blendingEnabled = value;
+    ((MTLRenderPipelineDescriptor *) self).colorAttachments[index].blendingEnabled = (value != 0);
 }
 
 void RenderPipelineDescriptor_setColorAttachmentAlphaBlendOperation(RenderPipelineDescriptor self, int index, MBEnum value) {
@@ -239,7 +239,7 @@ void RenderPassDescriptor_setColorAttachmentLoadAction(RenderPassDescriptor self
     ((MTLRenderPassDescriptor *)self).colorAttachments[index].loadAction = val;
 }
 
-void RenderPassDescriptor_setColorAttachmentStoreaction(RenderPassDescriptor self, int index, MBEnum val) {
+void RenderPassDescriptor_setColorAttachmentStoreAction(RenderPassDescriptor self, int index, MBEnum val) {
     ((MTLRenderPassDescriptor *)self).colorAttachments[index].storeAction = val;
 }
 

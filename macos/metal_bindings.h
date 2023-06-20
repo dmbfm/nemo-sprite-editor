@@ -117,8 +117,8 @@ void RenderPipelineDescriptor_reset(RenderPipelineDescriptor self);
 void RenderPipelineDescriptor_setVertexFunction(RenderPipelineDescriptor self, Function value);
 void RenderPipelineDescriptor_setFragmentFunction(RenderPipelineDescriptor self, Function value);
 void RenderPipelineDescriptor_setVertexDescriptor(RenderPipelineDescriptor self, VertexDescriptor value);
-void RenderPipelineDescriptor_setVertexBufferMultability(RenderPipelineDescriptor self, int index, MBEnum multability);
-void RenderPipelineDescriptor_setFragmentBufferMultability(RenderPipelineDescriptor self, int index, MBEnum multability);
+void RenderPipelineDescriptor_setVertexBufferMutability(RenderPipelineDescriptor self, int index, MBEnum mutability);
+void RenderPipelineDescriptor_setFragmentBufferMutability(RenderPipelineDescriptor self, int index, MBEnum mutability);
 void RenderPipelineDescriptor_setColorAttachmentPixelFormat(RenderPipelineDescriptor self, int index, MBEnum value);
 void RenderPipelineDescriptor_setColorAttachmentWriteMask(RenderPipelineDescriptor self, int index, MBEnum value);
 void RenderPipelineDescriptor_setColorAttachmentBlendingEnabled(RenderPipelineDescriptor self, int index, MBBool value);
@@ -144,7 +144,7 @@ void RenderPassDescriptor_setColorAttachmentTexture(RenderPassDescriptor self, i
 void RenderPassDescriptor_setColorAttachmentLevel(RenderPassDescriptor self, int index, uint64_t val);
 void RenderPassDescriptor_setColorAttachmentSlice(RenderPassDescriptor self, int index, uint64_t val);
 void RenderPassDescriptor_setColorAttachmentLoadAction(RenderPassDescriptor self, int index, MBEnum val);
-void RenderPassDescriptor_setColorAttachmentStoreaction(RenderPassDescriptor self, int index, MBEnum val);
+void RenderPassDescriptor_setColorAttachmentStoreAction(RenderPassDescriptor self, int index, MBEnum val);
 void RenderPassDescriptor_setDepthAttachmentClearDepth(RenderPassDescriptor self, double value);
 void RenderPassDescriptor_setStencilAttachmentClearStencil(RenderPassDescriptor self, double value);
 
