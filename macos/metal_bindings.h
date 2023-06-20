@@ -168,6 +168,7 @@ void RenderCommandEncoder_setVertexBytes(RenderCommandEncoder self, const void *
  ******************************************************************************/
 
 void* Buffer_contents(Buffer self);
+uint64_t Buffer_length(Buffer self);
 
 
 /******************************************************************************
@@ -177,7 +178,7 @@ void* Buffer_contents(Buffer self);
 VertexDescriptor VertexDescriptor_init(void);
 void VertexDescriptor_reset(VertexDescriptor self);
 void VertexDescriptor_setAttributeFormat(VertexDescriptor self, int index, MBEnum value);
-void VertexDescriptor_setAttributeOffet(VertexDescriptor self, int index, uint64_t value);
+void VertexDescriptor_setAttributeOffset(VertexDescriptor self, int index, uint64_t value);
 void VertexDescriptor_setAttributeBufferIndex(VertexDescriptor self, int index, uint64_t value);
 void VertexDescriptor_setLayoutStride(VertexDescriptor self, int index, uint64_t value);
 void VertexDescriptor_setLayoutStepFunction(VertexDescriptor self, int index, MBEnum value);

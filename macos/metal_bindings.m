@@ -294,6 +294,10 @@ void* Buffer_contents(Buffer self) {
     return [(id<MTLBuffer>)self contents];
 }
 
+uint64_t Buffer_length(Buffer self) {
+    return [(id<MTLBuffer>) self length];
+}
+
 /******************************************************************************
  * MTLVertexDescriptor
  ******************************************************************************/
@@ -311,7 +315,7 @@ void VertexDescriptor_setAttributeFormat(VertexDescriptor self, int index, MBEnu
     ((MTLVertexDescriptor *)self).attributes[index].format = value;
 }
 
-void VertexDescriptor_setAttributeOffet(VertexDescriptor self, int index, uint64_t value) {
+void VertexDescriptor_setAttributeOffset(VertexDescriptor self, int index, uint64_t value) {
     ((MTLVertexDescriptor *)self).attributes[index].offset = value;
 }
 

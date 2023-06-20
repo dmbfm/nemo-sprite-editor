@@ -1,3 +1,19 @@
+pub const TriangleFillMode = enum(u64) {
+    MTLTriangleFillModeFill = 0,
+    MTLTriangleFillModeLines = 1,
+};
+
+pub const CullMode = enum(u64) {
+    MTLCullModeNone = 0,
+    MTLCullModeFront = 1,
+    MTLCullModeBack = 2,
+};
+
+pub const Winding = enum(u64) {
+    MTLWindingClockwise = 0,
+    MTLWindingCounterClockwise = 1,
+};
+
 pub const LoadAction = enum(u64) {
     MTLLoadActionDontCare = 0,
     MTLLoadActionLoad = 1,
