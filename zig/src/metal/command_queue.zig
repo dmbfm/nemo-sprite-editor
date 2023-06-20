@@ -1,4 +1,4 @@
-pub const CommandBuffer = @import("command_buffer.zig").CommandBuffer;
+const CommandBuffer = @import("command_buffer.zig").CommandBuffer;
 
 pub const CommandQueue = opaque {
     const Error = error{

@@ -1,6 +1,6 @@
-pub const Drawable = @import("drawable.zig").Drawable;
-pub const RenderCommandEncoder = @import("render_command_encoder.zig").RenderCommandEncoder;
-pub const RenderPassDescriptor = @import("render_pass_descriptor.zig").RenderPassDescriptor;
+const Drawable = @import("drawable.zig").Drawable;
+const RenderCommandEncoder = @import("render_command_encoder.zig").RenderCommandEncoder;
+const RenderPassDescriptor = @import("render_pass_descriptor.zig").RenderPassDescriptor;
 
 pub const CommandBuffer = opaque {
     const Error = error{
@@ -34,7 +34,7 @@ pub const CommandBuffer = opaque {
         CommandBuffer_setLabel(self, label.ptr);
     }
 
-    pub fn renderCommandEncoderWithDescriptor(self: *CommandBuffer, desc: *RenderPassDescriptor) Error!RenderCommandEncoder {
+    pub fn renderCommandEncoderWithDescriptor(self: *CommandBuffer, desc: *RenderPassDescriptor) Error!*RenderCommandEncoder {
         var result = CommandBuffer_renderCommandEncoderWithDescriptor(self, desc);
         if (result == null) {
             return Error.NewRenderCommandEncoder;

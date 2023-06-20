@@ -4,5 +4,6 @@
 void nemoInit(void);
 void nemoDeinit(void);
 void nemoFrame(void *ctx);
+void *nemoMetalDevice(void);
 
 #endif

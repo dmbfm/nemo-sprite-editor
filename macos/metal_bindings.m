@@ -92,6 +92,7 @@ Texture Device_newTextureWithDescriptor(Device self, TextureDescriptor desc) {
 
 CommandBuffer CommandQueue_commandBuffer(CommandQueue self) {
     id<MTLCommandBuffer> r = [(id<MTLCommandQueue>) self commandBuffer];
+    //__builtin_debugtrap();
     RETURN_RETAIN(r);
 }
 
@@ -126,7 +127,8 @@ RenderCommandEncoder CommandBuffer_renderCommandEncoderWithDescriptor(CommandBuf
 
 RenderPipelineDescriptor RenderPipelineDescriptor_init(void) {
     MTLRenderPipelineDescriptor *desc = [[MTLRenderPipelineDescriptor alloc] init];
-    RETURN_RETAIN(desc);
+    return desc;
+    //RETURN_RETAIN(desc);
 }
 
 void RenderPipelineDescriptor_setLabel(RenderPipelineDescriptor self, const char *label) {
@@ -207,7 +209,8 @@ void RenderPipelineDescriptor_setStencilAttachmentPixelFormat(RenderPipelineDesc
 
 RenderPassDescriptor RenderPassDescriptor_init(void) {
     MTLRenderPassDescriptor *desc = [[MTLRenderPassDescriptor alloc] init];
-    RETURN_RETAIN(desc);
+    return desc;
+    //RETURN_RETAIN(desc);
 }
 
 void RenderPassDescriptor_setColorAttachmentClearColor(RenderPassDescriptor self, int index, ClearColor val) {
@@ -284,6 +287,10 @@ void RenderCommandEncoder_setVertexBytes(RenderCommandEncoder self, const void *
     [(id<MTLRenderCommandEncoder>)self setVertexBytes:bytes length:(NSUInteger)length atIndex:(NSUInteger)index];
 }
 
+void RenderCommandEncoder_endEncoding(RenderCommandEncoder self) {
+    [(id<MTLRenderCommandEncoder>) self endEncoding];
+}
+
 
 
 /******************************************************************************
@@ -342,7 +349,8 @@ void VertexDescriptor_setLayoutStepValue(VertexDescriptor self, int index, uint6
 
 TextureDescriptor TextureDescriptor_init(void) {
     MTLTextureDescriptor *desc = [[MTLTextureDescriptor alloc] init];
-    RETURN_RETAIN(desc);
+    return desc;
+    //RETURN_RETAIN(desc);
 }
 
 TextureDescriptor TextureDescriptor_texture2DDescriptorWithPixelFormat(MBEnum pixel_format, uint64_t width, uint64_t height, MBBool mipmapped) {

@@ -18,6 +18,7 @@ pub const RenderCommandEncoder = opaque {
     extern fn RenderCommandEncoder_setBlendColor(self: *Self, r: f32, g: f32, b: f32, a: f32) void;
     extern fn RenderCommandEncoder_setVertexBuffer(self: *Self, buffer: *Buffer, offset: u64, index: u64) void;
     extern fn RenderCommandEncoder_setVertexBytes(self: *Self, bytes: [*c]const u8, length: u64, index: u64) void;
+    extern fn RenderCommandEncoder_endEncoding(self: *Self) void;
 
     pub fn setRenderPipelineState(self: *Self, state: *RenderPipelineState) void {
         RenderCommandEncoder_setRenderPipelineState(self, state);
@@ -53,5 +54,9 @@ pub const RenderCommandEncoder = opaque {
 
     pub fn setVertexBytes(self: *Self, bytes: []const u8, index: usize) void {
         RenderCommandEncoder_setVertexBytes(self, bytes.ptr, @intCast(u64, bytes.len), @intCast(u64, index));
+    }
+
+    pub fn endEncoding(self: *Self) void {
+        RenderCommandEncoder_endEncoding(self);
     }
 };
