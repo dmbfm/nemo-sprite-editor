@@ -149,12 +149,12 @@ void RenderPipelineDescriptor_setVertexDescriptor(RenderPipelineDescriptor self,
     [(MTLRenderPipelineDescriptor *) self setVertexDescriptor:(MTLVertexDescriptor *)value];
 }
 
-void RenderPipelineDescriptor_setVertexBufferMultability(RenderPipelineDescriptor self, int index, MBEnum multability) {
-    ((MTLRenderPipelineDescriptor *)self).vertexBuffers[index].mutability = multability;
+void RenderPipelineDescriptor_setVertexBufferMutability(RenderPipelineDescriptor self, int index, MBEnum mutability) {
+    ((MTLRenderPipelineDescriptor *)self).vertexBuffers[index].mutability = mutability;
 }
 
-void RenderPipelineDescriptor_setFragmentBufferMultability(RenderPipelineDescriptor self, int index, MBEnum multability) {
-    ((MTLRenderPipelineDescriptor *)self).fragmentBuffers[index].mutability = multability;
+void RenderPipelineDescriptor_setFragmentBufferMutability(RenderPipelineDescriptor self, int index, MBEnum mutability) {
+    ((MTLRenderPipelineDescriptor *)self).fragmentBuffers[index].mutability = mutability;
 }
 
 void RenderPipelineDescriptor_setColorAttachmentPixelFormat(RenderPipelineDescriptor self, int index, MBEnum value) {

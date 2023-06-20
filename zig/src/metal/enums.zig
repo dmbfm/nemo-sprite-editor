@@ -1,3 +1,9 @@
+pub const Mutability = enum(u64) {
+    MTLMutabilityDefault = 0,
+    MTLMutabilityMutable = 1,
+    MTLMutabilityImmutable = 2,
+};
+
 pub const VertexStepFunction = enum(u64) {
     constant = 0,
     per_vertex = 1,
