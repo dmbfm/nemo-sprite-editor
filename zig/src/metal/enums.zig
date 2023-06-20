@@ -1,3 +1,15 @@
+pub const CPUCacheMode = enum(u64) {
+    MTLCPUCacheModeDefaultCache = 0,
+    MTLCPUCacheModeWriteCombined = 1,
+};
+
+pub const StorageMode = enum(u64) {
+    MTLStorageModeShared = 0,
+    MTLStorageModeManaged = 1,
+    MTLStorageModePrivate = 2,
+    MTLStorageModeMemoryless = 3,
+};
+
 pub const TriangleFillMode = enum(u64) {
     MTLTriangleFillModeFill = 0,
     MTLTriangleFillModeLines = 1,
