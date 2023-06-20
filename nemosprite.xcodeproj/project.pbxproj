@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AE5E4DDC2A3F560F00C66C0A /* app_delegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E4DDB2A3F560F00C66C0A /* app_delegate.m */; };
-		AE5E4DDF2A3F560F00C66C0A /* view_controller.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E4DDE2A3F560F00C66C0A /* view_controller.m */; };
 		AE5E4DE12A3F561100C66C0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE5E4DE02A3F561100C66C0A /* Assets.xcassets */; };
 		AE5E4DE42A3F561100C66C0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE5E4DE22A3F561100C66C0A /* Main.storyboard */; };
 		AE5E4DE62A3F561100C66C0A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E4DE52A3F561100C66C0A /* main.m */; };
@@ -17,16 +15,11 @@
 		AE5E4DF42A3F701E00C66C0A /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5E4DF22A3F701E00C66C0A /* MetalKit.framework */; };
 		AE5E4DF62A3F703600C66C0A /* libzig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5E4DF52A3F702800C66C0A /* libzig.a */; };
 		AE5E4DF92A3F7E5900C66C0A /* some_shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = AE5E4DF82A3F7E5900C66C0A /* some_shaders.metal */; };
-		AE5E4DFE2A3FB41700C66C0A /* nemo_view.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E4DFD2A3FB41700C66C0A /* nemo_view.m */; };
-		AE5E4E012A41481F00C66C0A /* nemo_view_context.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E4E002A41481F00C66C0A /* nemo_view_context.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AED0DC112A42184D00C9FC0A /* nemo_app.m in Sources */ = {isa = PBXBuildFile; fileRef = AED0DC102A42184D00C9FC0A /* nemo_app.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AE5E4DD72A3F560F00C66C0A /* nemosprite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nemosprite.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AE5E4DDA2A3F560F00C66C0A /* app_delegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = app_delegate.h; sourceTree = "<group>"; };
-		AE5E4DDB2A3F560F00C66C0A /* app_delegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = app_delegate.m; sourceTree = "<group>"; };
-		AE5E4DDD2A3F560F00C66C0A /* view_controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = view_controller.h; sourceTree = "<group>"; };
-		AE5E4DDE2A3F560F00C66C0A /* view_controller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = view_controller.m; sourceTree = "<group>"; };
 		AE5E4DE02A3F561100C66C0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE5E4DE32A3F561100C66C0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AE5E4DE52A3F561100C66C0A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -37,10 +30,8 @@
 		AE5E4DF22A3F701E00C66C0A /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		AE5E4DF52A3F702800C66C0A /* libzig.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzig.a; path = "zig/zig-out/lib/libzig.a"; sourceTree = "<group>"; };
 		AE5E4DF82A3F7E5900C66C0A /* some_shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = some_shaders.metal; sourceTree = "<group>"; };
-		AE5E4DFD2A3FB41700C66C0A /* nemo_view.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = nemo_view.m; sourceTree = "<group>"; };
-		AE5E4DFF2A3FB42300C66C0A /* nemo_view.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nemo_view.h; sourceTree = "<group>"; };
-		AE5E4E002A41481F00C66C0A /* nemo_view_context.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = nemo_view_context.m; sourceTree = "<group>"; };
-		AE5E4E022A41482B00C66C0A /* nemo_view_context.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nemo_view_context.h; sourceTree = "<group>"; };
+		AED0DC102A42184D00C9FC0A /* nemo_app.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = nemo_app.m; sourceTree = "<group>"; };
+		AED0DC122A42185900C9FC0A /* nemo_app.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nemo_app.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,12 +68,6 @@
 		AE5E4DD92A3F560F00C66C0A /* macos */ = {
 			isa = PBXGroup;
 			children = (
-				AE5E4DDA2A3F560F00C66C0A /* app_delegate.h */,
-				AE5E4DDB2A3F560F00C66C0A /* app_delegate.m */,
-				AE5E4DDD2A3F560F00C66C0A /* view_controller.h */,
-				AE5E4DDE2A3F560F00C66C0A /* view_controller.m */,
-				AE5E4DFD2A3FB41700C66C0A /* nemo_view.m */,
-				AE5E4DFF2A3FB42300C66C0A /* nemo_view.h */,
 				AE5E4DE52A3F561100C66C0A /* main.m */,
 				AE5E4DED2A3F574C00C66C0A /* metal_bindings.m */,
 				AE5E4DEF2A3F575D00C66C0A /* metal_bindings.h */,
@@ -90,8 +75,8 @@
 				AE5E4DE02A3F561100C66C0A /* Assets.xcassets */,
 				AE5E4DE22A3F561100C66C0A /* Main.storyboard */,
 				AE5E4DE72A3F561100C66C0A /* nemosprite.entitlements */,
-				AE5E4E002A41481F00C66C0A /* nemo_view_context.m */,
-				AE5E4E022A41482B00C66C0A /* nemo_view_context.h */,
+				AED0DC102A42184D00C9FC0A /* nemo_app.m */,
+				AED0DC122A42185900C9FC0A /* nemo_app.h */,
 			);
 			path = macos;
 			sourceTree = "<group>";
@@ -197,11 +182,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE5E4DFE2A3FB41700C66C0A /* nemo_view.m in Sources */,
-				AE5E4DDF2A3F560F00C66C0A /* view_controller.m in Sources */,
 				AE5E4DE62A3F561100C66C0A /* main.m in Sources */,
-				AE5E4E012A41481F00C66C0A /* nemo_view_context.m in Sources */,
-				AE5E4DDC2A3F560F00C66C0A /* app_delegate.m in Sources */,
+				AED0DC112A42184D00C9FC0A /* nemo_app.m in Sources */,
 				AE5E4DF92A3F7E5900C66C0A /* some_shaders.metal in Sources */,
 				AE5E4DEE2A3F574C00C66C0A /* metal_bindings.m in Sources */,
 			);

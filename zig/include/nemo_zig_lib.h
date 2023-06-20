@@ -3,7 +3,7 @@
 
 void nemoInit(void);
 void nemoDeinit(void);
-void nemoFrame(void *ctx);
+void nemoFrame(void);
 void *nemoMetalDevice(void);
 
 #endif

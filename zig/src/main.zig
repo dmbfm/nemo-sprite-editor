@@ -1,8 +1,7 @@
 const std = @import("std");
 const testing = std.testing;
 const mtl = @import("metal.zig");
-
-const ViewContext = @import("view_context.zig").ViewContext;
+const app = @import("app.zig");
 
 const Nemo = struct {
     device: *mtl.Device = undefined,
@@ -16,18 +15,27 @@ const Nemo = struct {
         self.command_queue = try self.device.newCommandQueue();
     }
 
-    pub fn frame(self: *Nemo, ctx: *ViewContext) !void {
-        ctx.setClearColor(mtl.ClearColor.init(1, 0, 0, 1));
+    pub fn frame(self: *Nemo) !void {
+        if (app.windowResized()) {
+            std.log.info("REIsized!!!!!!!!!!!!!!!!!!!!!!!!!", .{});
+        }
+
+        var r: f64 = @intToFloat(f64, app.windowWith()) / 1080.0;
+
+        app.setClearColor(mtl.ClearColor.init(r, 0, 0, 1));
 
         var command_buffer = try self.command_queue.commandBuffer();
         defer command_buffer.deinit();
 
-        var render_pass_descriptor = try ctx.currentRenderPassDescriptor();
+        var render_pass_descriptor = try app.currentRenderPassDescriptor();
 
         var render_command_encoder = try command_buffer.renderCommandEncoderWithDescriptor(render_pass_descriptor);
         render_command_encoder.endEncoding();
 
-        var drawable = try ctx.currentDrawable();
+        var drawable = app.currentDrawable() catch {
+            std.log.info("No drawable available; skipping frame", .{});
+            return;
+        };
         command_buffer.presentDrawable(drawable);
         command_buffer.commit();
     }
@@ -59,8 +67,8 @@ export fn nemoDeinit() void {
     };
 }
 
-export fn nemoFrame(ctx: *ViewContext) void {
-    nemo.frame(ctx) catch {
+export fn nemoFrame() void {
+    nemo.frame() catch {
         @panic("nemoFrame");
     };
 }
