@@ -3,16 +3,29 @@ const testing = std.testing;
 const mtl = @import("metal.zig");
 const app = @import("app.zig");
 
+const math = @import("math.zig");
+
+const Quad = struct {
+    position: math.Vec3f,
+    width: f32,
+    height: f32,
+    texture: u32,
+};
+
+const QuadRenderer = struct {};
+
 const Nemo = struct {
     device: *mtl.Device = undefined,
     command_queue: *mtl.CommandQueue = undefined,
-    //library: mtl.Library = undefined,
+    library: *mtl.Library = undefined,
+
     //buffer: mtl.Buffer = undefined,
     //render_pipeline_state: mtl.RenderPipelineState = undefined,
 
     pub fn init(self: *Nemo) !void {
         self.device = try mtl.Device.init();
         self.command_queue = try self.device.newCommandQueue();
+        self.library = try self.device.newDefaultLibrary();
     }
 
     pub fn frame(self: *Nemo) !void {
@@ -42,6 +55,8 @@ const Nemo = struct {
 
     pub fn deinit(self: *Nemo) !void {
         self.device.deinit();
+        self.command_queue.deinit();
+        self.library.deinit();
     }
 
     pub fn metalDevice(self: *Nemo) ?*mtl.Device {
