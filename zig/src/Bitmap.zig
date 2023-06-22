@@ -1,5 +1,6 @@
 const std = @import("std");
 const Palette = @import("Palette.zig");
+const random = @import("random.zig");
 
 data: []u8 = undefined,
 width: usize,
@@ -57,6 +58,20 @@ pub fn textureData(self: *Bitmap, pal: *const Palette, output: []u8) Error!void 
     }
 }
 
+pub fn randomize(self: *Bitmap, max_index: u8) void {
+    for (self.data, 0..) |_, i| {
+        self.data[i] = random.intRange(u8, 0, max_index);
+    }
+}
+
 pub fn deinit(self: *Bitmap) void {
     self.allocator.free(self.data);
+}
+
+test {
+    var allocator = std.testing.allocator;
+    var b = try Bitmap.init(allocator, 100, 100);
+    defer b.deinit();
+    b.randomize(255);
+    // std.log.warn(" {any} ", .{b.data});
 }
