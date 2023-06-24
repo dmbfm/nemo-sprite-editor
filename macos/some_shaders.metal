@@ -18,14 +18,16 @@ struct VertexOutput {
     float2 texcoord;
 };
 
+
+
 struct FragmentUniformData {
     float3 color;
 };
 
 vertex
-VertexOutput vertex_main( VertexInput in [[ stage_in ]] ) {
+VertexOutput vertex_main( VertexInput in [[ stage_in ]], constant float4x4 &proj_view_mat [[ buffer(1) ]] ) {
     VertexOutput out;
-    out.position = float4(in.position, 1);
+    out.position = proj_view_mat * float4(in.position, 1);
     out.texcoord = in.texcoord;
     return out;
 }

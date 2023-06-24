@@ -73,7 +73,7 @@ pub fn drawQuads(
 ) !void {
     // Update global data
     {
-        var contents = self.quad_buffer.?.contents([16]f32);
+        var contents = self.global_uniform_buffer.?.contents([16]f32);
         contents[0] = camera.matrix.data;
     }
 
@@ -129,7 +129,7 @@ pub fn drawQuads(
             var encoder = try command_buffer.renderCommandEncoderWithDescriptor(render_pass_descriptor);
 
             encoder.setRenderPipelineState(self.pipelines[0]);
-            encoder.setFragmentBuffer(self.global_uniform_buffer.?, 0, 1);
+            encoder.setVertexBuffer(self.global_uniform_buffer.?, 0, 1);
 
             for (quadlist, 0..) |_, i| {
                 encoder.setVertexBuffer(self.quad_buffer.?, i * @sizeOf(QuadVertexData), 0);
