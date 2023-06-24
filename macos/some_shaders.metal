@@ -8,12 +8,29 @@
 #include <metal_stdlib>
 using namespace metal;
 
+struct VertexInput {
+    float3 position [[ attribute(0) ]];
+    float2 texcoord [[ attribute(1) ]];
+};
+
+struct VertexOutput {
+    float4 position [[ position ]];
+    float2 texcoord;
+};
+
+struct FragmentUniformData {
+    float3 color;
+};
+
 vertex
-float4 vertex_main() {
-    return float4(0, 0, 0, 1);
+VertexOutput vertex_main( VertexInput in [[ stage_in ]] ) {
+    VertexOutput out;
+    out.position = float4(in.position, 1);
+    out.texcoord = in.texcoord;
+    return out;
 }
 
 fragment
-float4 frag_main() {
-    return float4(1, 0, 0, 1);
+float4 frag_main(VertexOutput in [[ stage_in ]], constant FragmentUniformData *uniforms [[ buffer(11)]]) {
+    return float4(uniforms->color, 1);
 }

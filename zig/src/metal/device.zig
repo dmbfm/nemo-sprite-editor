@@ -22,7 +22,7 @@ pub const Device = opaque {
     extern fn Device_newDefaultLibrary(self: *Device) ?*Library;
     extern fn Device_newBufferWithLength(self: *Device, length: usize) ?*Buffer;
     extern fn Device_newBufferWithBytes(self: *Device, bytes: [*c]const u8, length: usize) ?*Buffer;
-    extern fn Device_newRenderPipelineStateWithDescriptor(self: Device, desc: *RenderPipelineDescriptor) ?*RenderPipelineState;
+    extern fn Device_newRenderPipelineStateWithDescriptor(self: *Device, desc: *RenderPipelineDescriptor) ?*RenderPipelineState;
     extern fn Device_getName(self: *Device, out: [*c]u8, max_len: usize) c_int;
     extern fn Device_newTextureWithDescriptor(self: *Device, desc: *TextureDescriptor) ?*Texture;
 

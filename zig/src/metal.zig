@@ -13,3 +13,4 @@ pub usingnamespace @import("metal/render_pipeline_state.zig");
 pub usingnamespace @import("metal/structs.zig");
 pub usingnamespace @import("metal/texture.zig");
 pub usingnamespace @import("metal/texture_descriptor.zig");
+pub usingnamespace @import("metal/vertex_descriptor.zig");

@@ -58,6 +58,12 @@ pub fn textureData(self: *Bitmap, pal: *const Palette, output: []u8) Error!void 
     }
 }
 
+pub fn writeP3(self: *const Bitmap, writer: anytype) !void {
+    _ = writer;
+    _ = self;
+    // TODO: Implement this
+}
+
 pub fn randomize(self: *Bitmap, max_index: u8) void {
     for (self.data, 0..) |_, i| {
         self.data[i] = random.intRange(u8, 0, max_index);

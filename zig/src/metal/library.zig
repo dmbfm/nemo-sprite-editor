@@ -12,7 +12,7 @@ pub const Library = opaque {
         release(self);
     }
 
-    pub fn newFunctionWithName(self: *Library, name: [:0]const u8) Error!Function {
+    pub fn newFunctionWithName(self: *Library, name: [:0]const u8) Error!*Function {
         var result = Library_newFunctionWithName(self, name.ptr);
         if (result == null) {
             return Error.NewFunctionError;

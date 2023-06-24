@@ -7,7 +7,7 @@ pub fn int(comptime T: type) T {
         instance = std.rand.DefaultPrng.init(0);
     }
 
-    instance.?.random().int(T);
+    return instance.?.random().int(T);
 }
 
 pub fn intRange(comptime T: type, min: T, max: T) T {

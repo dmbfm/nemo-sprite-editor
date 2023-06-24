@@ -127,8 +127,7 @@ RenderCommandEncoder CommandBuffer_renderCommandEncoderWithDescriptor(CommandBuf
 
 RenderPipelineDescriptor RenderPipelineDescriptor_init(void) {
     MTLRenderPipelineDescriptor *desc = [[MTLRenderPipelineDescriptor alloc] init];
-    return desc;
-    //RETURN_RETAIN(desc);
+    RETURN_RETAIN(desc);
 }
 
 void RenderPipelineDescriptor_setLabel(RenderPipelineDescriptor self, const char *label) {
@@ -291,6 +290,20 @@ void RenderCommandEncoder_endEncoding(RenderCommandEncoder self) {
     [(id<MTLRenderCommandEncoder>) self endEncoding];
 }
 
+void RenderCommandEncoder_setFragmentBytes(RenderCommandEncoder self, const void *bytes, uint64_t length, uint64_t index) {
+    [(id<MTLRenderCommandEncoder>)self setFragmentBytes:bytes length:(NSUInteger)length atIndex:(NSUInteger)index];
+}
+
+void RenderCommandEncoder_setFragmentBuffer(RenderCommandEncoder self, Buffer buffer, uint64_t offset, uint64_t index) {
+    [(id<MTLRenderCommandEncoder>)self setFragmentBuffer:(id<MTLBuffer>)buffer 
+                                                offset:(NSUInteger)offset 
+                                               atIndex:(NSUInteger)index];
+}
+
+
+void RenderCommandEncoder_drawPrimitives(RenderCommandEncoder self, MBEnum primitive_type, uint64_t vertex_start, uint64_t vertex_end) {
+    [(id<MTLRenderCommandEncoder>)self drawPrimitives:primitive_type vertexStart:(NSUInteger)vertex_start vertexCount:(NSUInteger)vertex_end];
+}
 
 
 /******************************************************************************

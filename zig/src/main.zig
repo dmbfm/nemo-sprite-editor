@@ -4,53 +4,65 @@ const mtl = @import("metal.zig");
 const app = @import("app.zig");
 
 const math = @import("math.zig");
-
-const Quad = struct {
-    position: math.Vec3f,
-    width: f32,
-    height: f32,
-    texture: u32,
-};
-
-const QuadRenderer = struct {};
+const Vec3f = math.Vec3f;
+const Camera = @import("Camera.zig");
+const Quad = @import("Quad.zig");
+const Renderer = @import("Renderer.zig");
 
 const Nemo = struct {
     device: *mtl.Device = undefined,
     command_queue: *mtl.CommandQueue = undefined,
     library: *mtl.Library = undefined,
-
-    //buffer: mtl.Buffer = undefined,
-    //render_pipeline_state: mtl.RenderPipelineState = undefined,
+    renderer: Renderer = .{},
 
     pub fn init(self: *Nemo) !void {
         self.device = try mtl.Device.init();
-        self.command_queue = try self.device.newCommandQueue();
-        self.library = try self.device.newDefaultLibrary();
+        //self.command_queue = try self.device.newCommandQueue();
+        //self.library = try self.device.newDefaultLibrary();
+
+        try self.renderer.init(self.device);
     }
 
     pub fn frame(self: *Nemo) !void {
-        if (app.windowResized()) {
-            std.log.info("REIsized!!!!!!!!!!!!!!!!!!!!!!!!!", .{});
-        }
+        app.setClearColor(mtl.ClearColor.init(1, 1, 1, 1));
 
-        var r: f64 = @intToFloat(f64, app.windowWith()) / 1080.0;
+        var camera = Camera.init(Vec3f.init(0, 0, 1), 1, 1, 0.1, 1000);
+        camera.updateMatrix();
 
-        app.setClearColor(mtl.ClearColor.init(r, 0, 0, 1));
+        // var quad = Quad{};
+        // quad.init()
+        // _ = quad;
+        var quad: Quad = Quad.init(Vec3f.init(0, 0, 0), 0.5, 0.5);
+        quad.material = .solid_color;
+        //NSColor(red: 0.326, green: 0.621, blue: 1.0, alpha: 1.0)
+        quad.color = .{ .r = 0.326, .g = 0.621, .b = 1, .a = 1 };
 
-        var command_buffer = try self.command_queue.commandBuffer();
-        defer command_buffer.deinit();
+        var quads: []const Quad = &[1]Quad{quad};
 
-        var render_pass_descriptor = try app.currentRenderPassDescriptor();
+        try self.renderer.drawQuads(camera, quads);
 
-        var render_command_encoder = try command_buffer.renderCommandEncoderWithDescriptor(render_pass_descriptor);
-        render_command_encoder.endEncoding();
+        //if (app.windowResized()) {
+        //    std.log.info("REIsized!!!!!!!!!!!!!!!!!!!!!!!!!", .{});
+        //}
 
-        var drawable = app.currentDrawable() catch {
-            std.log.info("No drawable available; skipping frame", .{});
-            return;
-        };
-        command_buffer.presentDrawable(drawable);
-        command_buffer.commit();
+        //var r: f64 = @intToFloat(f64, app.windowWith()) / 1080.0;
+
+        //app.setClearColor(mtl.ClearColor.init(r, 0, 0, 1));
+
+        //var command_buffer = try self.command_queue.commandBuffer();
+        //defer command_buffer.deinit();
+
+        //var render_pass_descriptor = try app.currentRenderPassDescriptor();
+
+        //var render_command_encoder = try command_buffer.renderCommandEncoderWithDescriptor(render_pass_descriptor);
+        //render_command_encoder.endEncoding();
+
+        //var drawable = app.currentDrawable() catch {
+        //    std.log.info("No drawable available; skipping frame", .{});
+        //    return;
+        //};
+        //command_buffer.presentDrawable(drawable);
+        //command_buffer.commit();
     }
 
     pub fn deinit(self: *Nemo) !void {

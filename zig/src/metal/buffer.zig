@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const Buffer = opaque {
     extern fn release(self: *Buffer) void;
     extern fn Buffer_contents(self: *Buffer) [*c]u8;
@@ -7,12 +9,13 @@ pub const Buffer = opaque {
         release(self);
     }
 
-    pub fn contents(self: *Buffer) []u8 {
+    pub fn contents(self: *Buffer, comptime T: type) []T {
         var ptr = Buffer_contents(self);
         var len = Buffer_length(self);
-        var r: []u8 = undefined;
-        r.ptr = ptr;
-        r.len = len;
+        var r: []T = undefined;
+        r.ptr = @ptrCast([*]T, @alignCast(@alignOf(T), ptr));
+        r.len = len / @sizeOf(T);
         return r;
+        //return std.mem.bytesAsSlice(T, r);
     }
 };

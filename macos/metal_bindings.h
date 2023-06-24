@@ -162,6 +162,9 @@ void RenderCommandEncoder_setScissorRect(RenderCommandEncoder self, MB_ScissorRe
 void RenderCommandEncoder_setBlendColor(RenderCommandEncoder self, float r, float g, float b, float a);
 void RenderCommandEncoder_setVertexBuffer(RenderCommandEncoder self, Buffer buffer, uint64_t offset, uint64_t index);
 void RenderCommandEncoder_setVertexBytes(RenderCommandEncoder self, const void *bytes, uint64_t length, uint64_t index);
+void RenderCommandEncoder_setFragmentBuffer(RenderCommandEncoder self, Buffer buffer, uint64_t offset, uint64_t index);
+void RenderCommandEncoder_setFragmentBytes(RenderCommandEncoder self, const void *bytes, uint64_t length, uint64_t index);
+void RenderCommandEncoder_drawPrimitives(RenderCommandEncoder self, MBEnum primitive_type, uint64_t vertex_start, uint64_t vertex_end);
 void RenderCommandEncoder_endEncoding(RenderCommandEncoder self);
 
 /******************************************************************************

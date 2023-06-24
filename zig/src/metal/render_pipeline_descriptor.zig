@@ -9,7 +9,12 @@ const BlendFactor = @import("enums.zig").BlendFactor;
 pub const RenderPipelineDescriptor = opaque {
     const Self = @This();
 
+    const Error = error{
+        RenderPipelineDescriptorInitError,
+    };
+
     extern fn release(self: *RenderPipelineDescriptor) void;
+    extern fn RenderPipelineDescriptor_init() ?*RenderPipelineDescriptor;
     extern fn RenderPipelineDescriptor_setLabel(self: *Self, label: [*:0]const u8) void;
     extern fn RenderPipelineDescriptor_reset(self: *Self) void;
     extern fn RenderPipelineDescriptor_setVertexFunction(self: *Self, value: *Function) void;
@@ -28,6 +33,14 @@ pub const RenderPipelineDescriptor = opaque {
     extern fn RenderPipelineDescriptor_setColorAttachmentSourceRgbBlendFactor(self: *Self, index: u64, value: u64) void;
     extern fn RenderPipelineDescriptor_setDepthAttachmentPixelFormat(self: *Self, index: c_int, value: u64) void;
     extern fn RenderPipelineDescriptor_setStencilAttachmentPixelFormat(self: *Self, index: c_int, value: u64) void;
+
+    pub fn init() Error!*RenderPipelineDescriptor {
+        var result = RenderPipelineDescriptor_init();
+        if (result == null) {
+            return Error.RenderPipelineDescriptorInitError;
+        }
+        return result.?;
+    }
 
     pub fn deinit(self: *Self) void {
         release(self);
@@ -62,7 +75,7 @@ pub const RenderPipelineDescriptor = opaque {
     }
 
     pub fn setColorAttachmentPixelFormat(self: *Self, index: usize, format: PixelFormat) void {
-        RenderPipelineDescriptor_setColorAttachmentPixelFormat(self, @intCast(c_int, index), @enumToInt(format));
+        RenderPipelineDescriptor_setColorAttachmentPixelFormat(self, @intCast(u64, index), @enumToInt(format));
     }
 
     pub fn setColorAttachmentWriteMask(self: *Self, index: usize, value: WriteMask) void {

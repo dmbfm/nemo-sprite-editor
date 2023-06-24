@@ -1,7 +1,8 @@
 const std = @import("std");
 const Rgb = @import("Rgb.zig");
+const random = @import("random.zig");
 
-colors: [256 * 3]u8 = [_]u8{0} ** 3 * 256,
+colors: [256 * 3]u8 = [_]u8{0} ** (3 * 256),
 transparency: [256]bool = [_]bool{false} ** 256,
 
 const Error = error{
@@ -44,4 +45,17 @@ pub inline fn setTransparency(self: *Palette, index: usize, transparent: bool) v
 
 pub inline fn getTransparency(self: *Palette, index: usize) bool {
     return self.transparency[index];
+}
+
+pub fn randomize(self: *Palette) void {
+    for (0..256) |i| {
+        self.colors[3 * i] = random.int(u8);
+        self.colors[3 * i + 1] = random.int(u8);
+        self.colors[3 * i + 2] = random.int(u8);
+    }
+}
+
+test {
+    var p = Palette{};
+    p.randomize();
 }
