@@ -1,3 +1,4 @@
+const std = @import("std");
 const mtl = @import("../metal.zig");
 const Renderer = @import("../Renderer.zig");
 const Camera = @import("../Camera.zig");
@@ -15,11 +16,10 @@ const NumPipelines = 1;
 
 vertex_buffer: [MaxInFlightBuffers]*mtl.Buffer = undefined,
 uniform_buffer: [MaxInFlightBuffers]*mtl.Buffer = undefined,
-global_buffer: [MaxInFlightBuffers]*mtl.Buffer = undefined,
 
 pipelines: [NumPipelines]*mtl.RenderPipelineState = undefined,
 
-pub fn init(self: *Self, renderer: *Renderer) void {
+pub fn init(self: *Self, renderer: *Renderer) !void {
     var device = renderer.device;
     var library = renderer.library;
 
@@ -27,7 +27,6 @@ pub fn init(self: *Self, renderer: *Renderer) void {
     for (0..MaxInFlightBuffers) |i| {
         self.vertex_buffer[i] = try device.newBufferWithLength(VerticesPerQuad * MaxQuads * @sizeOf(VertexData));
         self.uniform_buffer[i] = try device.newBufferWithLength(MaxQuads * @sizeOf(UniformData));
-        self.global_buffer[i] = try device.newBufferWithLength(MaxQuads * @sizeOf([16]f32));
     }
 
     // Shader functions
@@ -71,7 +70,7 @@ pub fn drawQuads(
     renderer: *Renderer,
     quadlist: []const Quad,
     encoder: *mtl.RenderCommandEncoder,
-) void {
+) !void {
     var idx = renderer.current_frame_index;
 
     // Note: we assume global data is stored at buffer Renderer.BufferIndexGlobals,

@@ -17,8 +17,8 @@ pub fn QuadRenderer(comptime quad_renderer_type: QuadRendererType) type {
 
         const Self = @This();
 
-        pub fn init(self: *Self, renderer: *Renderer) void {
-            self.impl.init(renderer);
+        pub fn init(self: *Self, renderer: *Renderer) !void {
+            return self.impl.init(renderer);
         }
 
         pub fn drawQuads(
@@ -26,8 +26,8 @@ pub fn QuadRenderer(comptime quad_renderer_type: QuadRendererType) type {
             renderer: *Renderer,
             quadlist: []const Quad,
             encoder: *mtl.RenderCommandEncoder,
-        ) void {
-            self.impl.drawQuads(renderer, quadlist, encoder);
+        ) !void {
+            return self.impl.drawQuads(renderer, quadlist, encoder);
         }
     };
 }

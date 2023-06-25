@@ -9,6 +9,7 @@ pub const Buffer = opaque {
         release(self);
     }
 
+    // TODO: Check for null and return possible error.
     pub fn contents(self: *Buffer, comptime T: type) []T {
         var ptr = Buffer_contents(self);
         var len = Buffer_length(self);

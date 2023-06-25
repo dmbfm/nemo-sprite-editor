@@ -25,7 +25,7 @@ struct FragmentUniformData {
 };
 
 vertex
-VertexOutput vertex_main( VertexInput in [[ stage_in ]], constant float4x4 &proj_view_mat [[ buffer(1) ]], uint vid [[ vertex_id ]] ) {
+VertexOutput vertex_main( VertexInput in [[ stage_in ]], constant float4x4 &proj_view_mat [[ buffer(22) ]], uint vid [[ vertex_id ]] ) {
     VertexOutput out;
     out.position = proj_view_mat * float4(in.position, 1);
     //out.position += float4(0.1 * vid, 0, 0, 0);
