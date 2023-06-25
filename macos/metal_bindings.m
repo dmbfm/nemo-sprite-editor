@@ -104,9 +104,9 @@ void CommandBuffer_presentDrawable(CommandBuffer self, Drawable drawable) {
     [(id<MTLCommandBuffer>) self presentDrawable:(id<MTLDrawable>) drawable];
 }
 
-void CommandBuffer_addCompletedHandler(CommandBuffer self, void (*cb)(CommandBuffer)) {
+void CommandBuffer_addCompletedHandler(CommandBuffer self, void (*cb)(void *,CommandBuffer), void *user_data) {
     [(id<MTLCommandBuffer>)self addCompletedHandler:^(id<MTLCommandBuffer> buffer){
-        cb((CommandBuffer) buffer);
+        cb(user_data, (CommandBuffer) buffer);
     }];
 }
 

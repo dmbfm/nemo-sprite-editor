@@ -9,14 +9,45 @@ const Mat4f = math.Mat4f;
 const Camera = @import("Camera.zig");
 const Quad = @import("Quad.zig");
 const Renderer = @import("Renderer.zig");
+const Color = @import("Color.zig");
+const rnd = @import("random.zig");
 
 const Nemo = struct {
     device: *mtl.Device = undefined,
     renderer: Renderer = .{},
 
+    texture: Renderer.TextureHandle = 0,
+
+    quads: [10_000]Quad = undefined,
+
     pub fn init(self: *Nemo) !void {
         self.device = try mtl.Device.init();
         try self.renderer.init(self.device);
+        self.texture = try self.renderer.textureNew(100, 100);
+
+        // init quads
+        for (&self.quads) |*quad| {
+            quad.color = Color.random();
+            var x: f32 = rnd.floatRange(f32, -10, 10);
+            var y: f32 = rnd.floatRange(f32, -10, 10);
+            var w: f32 = rnd.floatRange(f32, 0.1, 2);
+            var h: f32 = rnd.floatRange(f32, 0.1, 2);
+            quad.position = Vec3f.init(x, y, 0);
+            quad.width = w;
+            quad.height = h;
+        }
+    }
+
+    pub fn updateQuads(self: *Nemo) void {
+        for (&self.quads) |*quad| {
+            var x: f32 = rnd.floatRange(f32, -10, 10);
+            var y: f32 = rnd.floatRange(f32, -10, 10);
+            var w: f32 = rnd.floatRange(f32, 0.1, 2);
+            var h: f32 = rnd.floatRange(f32, 0.1, 2);
+            quad.position = Vec3f.init(x, y, 0);
+            quad.width = w;
+            quad.height = h;
+        }
     }
 
     pub fn frame(self: *Nemo) !void {
@@ -25,14 +56,8 @@ const Nemo = struct {
         var camera = Camera.init(Vec3f.init(0, 0, 1), 10, 10, 0.1, 1000);
         camera.updateMatrix();
 
-        var quad: Quad = Quad.init(Vec3f.init(0, 0, 0), 0.5, 0.5);
-        quad.material = .solid_color;
-
-        quad.color = .{ .r = 0.326, .g = 0.621, .b = 1, .a = 1 };
-
-        var quads: []const Quad = &[1]Quad{quad};
-
-        try self.renderer.drawQuads(camera, quads);
+        //self.updateQuads();
+        try self.renderer.drawQuads(camera, self.quads[0..]);
 
         //if (app.windowResized()) {
         //    std.log.info("REIsized!!!!!!!!!!!!!!!!!!!!!!!!!", .{});
@@ -41,8 +66,6 @@ const Nemo = struct {
 
     pub fn deinit(self: *Nemo) !void {
         self.device.deinit();
-        self.command_queue.deinit();
-        self.library.deinit();
     }
 
     pub fn metalDevice(self: *Nemo) ?*mtl.Device {

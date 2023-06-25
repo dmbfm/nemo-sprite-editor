@@ -5,4 +5,5 @@ test {
     _ = @import("Quad.zig");
     _ = @import("Camera.zig");
     _ = @import("Renderer.zig");
+    _ = @import("pool.zig");
 }

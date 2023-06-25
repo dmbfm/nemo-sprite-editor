@@ -24,6 +24,10 @@ pub const TextureDescriptor = opaque {
         return result.?;
     }
 
+    pub fn deinit(self: *Self) void {
+        release(self);
+    }
+
     pub fn init2DDescriptorWithPixelFormat(pixel_format: enums.PixelFormat, width: usize, height: usize, mipmapped: bool) Error!*Self {
         var result = TextureDescriptor_texture2DDescriptorWithPixelFormat(
             @enumToInt(pixel_format),

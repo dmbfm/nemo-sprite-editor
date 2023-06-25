@@ -4,9 +4,20 @@ const Renderer = @This();
 const Camera = @import("Camera.zig");
 const mtl = @import("metal.zig");
 const app = @import("app.zig");
+const Pool = @import("pool.zig").Pool;
+const dispatch_semaphore_create = std.c.dispatch_semaphore_create;
+const dispatch_semaphore_wait = std.c.dispatch_semaphore_wait;
+const dispatch_semaphore_signal = std.c.dispatch_semaphore_signal;
+const DISPATCH_TIME_FOREVER = std.c.DISPATCH_TIME_FOREVER;
 
-const NumPipelines = 2;
-const MaxQuads = 100_000;
+pub const NumPipelines = 2;
+pub const MaxQuads = 100_000;
+pub const MaxTextures = MaxQuads;
+pub const MaxInFlightBuffers = 3;
+
+pub const BufferIndexVertex = 0;
+pub const BufferIndexUniforms = 11;
+pub const BufferIndexGlobals = 22;
 
 const QuadVertexData = extern struct {
     position: [3]f32,
@@ -17,24 +28,32 @@ const QuadUniformData = extern struct {
     color: [3]f32,
 };
 
+pub const TextureHandle = usize;
+
 library: *mtl.Library = undefined,
 device: *mtl.Device = undefined,
 command_queue: *mtl.CommandQueue = undefined,
+texture_pool: Pool(*mtl.Texture, 128) = undefined,
 
-quad_buffer: ?*mtl.Buffer = null,
-global_uniform_buffer: ?*mtl.Buffer = null,
-quad_uniform_buffer: ?*mtl.Buffer = null,
+quad_buffer: [MaxInFlightBuffers]*mtl.Buffer = undefined,
+global_uniform_buffer: [MaxInFlightBuffers]*mtl.Buffer = undefined,
+quad_uniform_buffer: [MaxInFlightBuffers]*mtl.Buffer = undefined,
 
 pipelines: [NumPipelines]*mtl.RenderPipelineState = undefined,
+
+frame_semaphore: std.c.dispatch_semaphore_t = undefined,
+current_frame_index: usize = 0,
 
 pub fn init(self: *Renderer, device: *mtl.Device) !void {
     self.device = device;
     self.library = try device.newDefaultLibrary();
     self.command_queue = try device.newCommandQueue();
 
-    self.quad_buffer = try device.newBufferWithLength(MaxQuads * @sizeOf(QuadVertexData));
-    self.global_uniform_buffer = try device.newBufferWithLength(@sizeOf([16]f32));
-    self.quad_uniform_buffer = try device.newBufferWithLength(MaxQuads * @sizeOf(QuadUniformData));
+    for (0..MaxInFlightBuffers) |i| {
+        self.quad_buffer[i] = try device.newBufferWithLength(MaxQuads * @sizeOf([6]QuadVertexData));
+        self.global_uniform_buffer[i] = try device.newBufferWithLength(MaxQuads * @sizeOf([16]f32));
+        self.quad_uniform_buffer[i] = try device.newBufferWithLength(MaxQuads * @sizeOf(QuadUniformData));
+    }
 
     var vertex_fn = try self.library.newFunctionWithName("vertex_main");
     defer vertex_fn.deinit();
@@ -64,6 +83,8 @@ pub fn init(self: *Renderer, device: *mtl.Device) !void {
     rpd.setColorAttachmentPixelFormat(0, mtl.PixelFormat.BGRA8Unorm);
 
     self.pipelines[0] = try device.newRenderPipelineStateWithDescriptor(rpd);
+
+    self.frame_semaphore = dispatch_semaphore_create(@as(isize, MaxInFlightBuffers)).?;
 }
 
 pub fn drawQuads(
@@ -71,16 +92,24 @@ pub fn drawQuads(
     camera: Camera,
     quadlist: []const Quad,
 ) !void {
+
+    // Wait for the frame semaphore
+    _ = dispatch_semaphore_wait(self.frame_semaphore, DISPATCH_TIME_FOREVER);
+
+    // Increment frame index
+    self.current_frame_index = (self.current_frame_index + 1) % @as(usize, MaxInFlightBuffers);
+    var idx = self.current_frame_index;
+
     // Update global data
     {
-        var contents = self.global_uniform_buffer.?.contents([16]f32);
+        var contents = self.global_uniform_buffer[idx].contents([16]f32);
         contents[0] = camera.matrix.data;
     }
 
     // Update per-quad data
     {
-        var contents = self.quad_buffer.?.contents([6]QuadVertexData);
-        var uniform_contents = self.quad_uniform_buffer.?.contents(QuadUniformData);
+        var contents = self.quad_buffer[idx].contents([6]QuadVertexData);
+        var uniform_contents = self.quad_uniform_buffer[idx].contents(QuadUniformData);
 
         for (quadlist, 0..) |quad, i| {
             const x = quad.position.x;
@@ -129,20 +158,45 @@ pub fn drawQuads(
             var encoder = try command_buffer.renderCommandEncoderWithDescriptor(render_pass_descriptor);
 
             encoder.setRenderPipelineState(self.pipelines[0]);
-            encoder.setVertexBuffer(self.global_uniform_buffer.?, 0, 1);
+            encoder.setVertexBuffer(self.global_uniform_buffer[idx], 0, 1);
 
             for (quadlist, 0..) |_, i| {
-                encoder.setVertexBuffer(self.quad_buffer.?, i * @sizeOf(QuadVertexData), 0);
-                encoder.setFragmentBuffer(self.quad_uniform_buffer.?, i * @sizeOf(QuadUniformData), 11);
+                encoder.setVertexBuffer(self.quad_buffer[idx], i * @sizeOf([6]QuadVertexData), 0);
+                encoder.setFragmentBuffer(self.quad_uniform_buffer[idx], i * @sizeOf(QuadUniformData), 11);
                 encoder.drawPrimitives(.triangle, 0, 6);
             }
 
             var drawable = try app.currentDrawable();
             encoder.endEncoding();
+
+            command_buffer.addCompletedHandler(Renderer, &commandBufferCompletedHandler, self);
+
             command_buffer.presentDrawable(drawable);
             command_buffer.commit();
         }
     }
+}
+
+pub fn commandBufferCompletedHandler(self: *Renderer, _: *mtl.CommandBuffer) void {
+    _ = dispatch_semaphore_signal(self.frame_semaphore);
+}
+
+pub fn textureNew(self: *Renderer, width: usize, height: usize) !TextureHandle {
+    var texture_desc = try mtl.TextureDescriptor.init2DDescriptorWithPixelFormat(mtl.PixelFormat.RGBA8Unorm, width, height, false);
+    defer texture_desc.deinit();
+
+    var handle = try self.texture_pool.alloc();
+
+    var texture = try self.device.newTextureWithDescriptor(texture_desc);
+
+    try self.texture_pool.set(handle, texture);
+
+    return handle;
+}
+
+pub fn textureSetData(self: *Renderer, texture: TextureHandle) void {
+    _ = texture;
+    _ = self;
 }
 
 test {

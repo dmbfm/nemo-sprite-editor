@@ -103,7 +103,7 @@ CommandBuffer CommandQueue_commandBuffer(CommandQueue self);
 
 void                 CommandBuffer_commit(CommandBuffer self);
 void                 CommandBuffer_presentDrawable(CommandBuffer self, Drawable drawable);
-void                 CommandBuffer_addCompletedHandler(CommandBuffer self, void (*cb)(CommandBuffer));
+void                 CommandBuffer_addCompletedHandler(CommandBuffer self, void (*cb)(void *, CommandBuffer), void *user_data);
 void                 CommandBuffer_setLabel(CommandBuffer self, const char *label);
 RenderCommandEncoder CommandBuffer_renderCommandEncoderWithDescriptor(CommandBuffer self, RenderPassDescriptor desc);
 
