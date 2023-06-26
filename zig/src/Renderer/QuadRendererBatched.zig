@@ -1,3 +1,22 @@
+//
+//  Quad batched renderer
+//
+//  We store verte data for all quads in a single buffer, just like we do with
+//  the dumb renderer.
+//
+//  Suppose we have N quads.
+//
+//  The Vertex buffer will then consist of 6 x N vertices, totalling 6 x N x
+//  sizeOf(VertexData) bytes.
+//
+//  The Uniform buffer will consist of N entries, totalling N x sizeOf(UniformData)
+//  bytes.
+//
+//  So far the arrangement is the same as in the dumb quad renderer. The
+//  difference now will be that instead of binding the buffers with offsets and
+//  encoding a draw function for each quad, we will issue a single draw command.
+//
+
 const std = @import("std");
 const mtl = @import("../metal.zig");
 const Renderer = @import("../Renderer.zig");
@@ -23,8 +42,6 @@ pub fn init(self: *Self, renderer: *Renderer) !void {
     var device = renderer.device;
     var library = renderer.library;
 
-    std.log.info("@sizeOf(UniformData) = {}", .{@sizeOf(UniformData)});
-
     // Init buffers
     for (0..MaxInFlightBuffers) |i| {
         self.vertex_buffer[i] = try device.newBufferWithLength(VerticesPerQuad * MaxQuads * @sizeOf(VertexData));
@@ -32,9 +49,9 @@ pub fn init(self: *Self, renderer: *Renderer) !void {
     }
 
     // Shader functions
-    var vertex_fn = try library.newFunctionWithName("vertex_main");
+    var vertex_fn = try library.newFunctionWithName("vertex_quad_batch_main");
     defer vertex_fn.deinit();
-    var fragment_fn = try library.newFunctionWithName("frag_main");
+    var fragment_fn = try library.newFunctionWithName("frag_quad_batch_main");
     defer fragment_fn.deinit();
 
     // Vertex descriptor
@@ -101,14 +118,10 @@ pub fn drawQuads(
         }
     }
 
-    // draw quads
     {
         encoder.setRenderPipelineState(self.pipelines[0]);
-
-        for (quadlist, 0..) |_, i| {
-            encoder.setVertexBuffer(self.vertex_buffer[idx], VerticesPerQuad * i * @sizeOf(VertexData), Renderer.BufferIndexVertex);
-            encoder.setFragmentBuffer(self.uniform_buffer[idx], i * @sizeOf(UniformData), Renderer.BufferIndexUniforms);
-            encoder.drawPrimitives(.triangle, 0, 6);
-        }
+        encoder.setVertexBuffer(self.vertex_buffer[idx], 0, Renderer.BufferIndexVertex);
+        encoder.setFragmentBuffer(self.uniform_buffer[idx], 0, Renderer.BufferIndexUniforms);
+        encoder.drawPrimitives(.triangle, 0, 6 * quadlist.len);
     }
 }

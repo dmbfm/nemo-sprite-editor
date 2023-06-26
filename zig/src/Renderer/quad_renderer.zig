@@ -2,14 +2,17 @@ const mtl = @import("../metal.zig");
 const Quad = @import("../Quad.zig");
 const Renderer = @import("../Renderer.zig");
 const QuadRendererDumb = @import("QuadRendererDumb.zig");
+const QuadRendererBatched = @import("QuadRendererBatched.zig");
 
 pub const QuadRendererType = enum {
     dumb,
+    batched,
 };
 
 pub fn QuadRenderer(comptime quad_renderer_type: QuadRendererType) type {
     const Impl = switch (quad_renderer_type) {
         .dumb => QuadRendererDumb,
+        .batched => QuadRendererBatched,
     };
 
     return struct {

@@ -16,6 +16,7 @@
 		AE5E4DF62A3F703600C66C0A /* libzig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5E4DF52A3F702800C66C0A /* libzig.a */; };
 		AE5E4DF92A3F7E5900C66C0A /* some_shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = AE5E4DF82A3F7E5900C66C0A /* some_shaders.metal */; };
 		AED0DC112A42184D00C9FC0A /* nemo_app.m in Sources */ = {isa = PBXBuildFile; fileRef = AED0DC102A42184D00C9FC0A /* nemo_app.m */; };
+		AED0DC192A48FA0A00C9FC0A /* quad_batch.metal in Sources */ = {isa = PBXBuildFile; fileRef = AED0DC182A48FA0A00C9FC0A /* quad_batch.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		AE5E4DF82A3F7E5900C66C0A /* some_shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = some_shaders.metal; sourceTree = "<group>"; };
 		AED0DC102A42184D00C9FC0A /* nemo_app.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = nemo_app.m; sourceTree = "<group>"; };
 		AED0DC122A42185900C9FC0A /* nemo_app.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nemo_app.h; sourceTree = "<group>"; };
+		AED0DC182A48FA0A00C9FC0A /* quad_batch.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = quad_batch.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 		AE5E4DCE2A3F560F00C66C0A = {
 			isa = PBXGroup;
 			children = (
+				AED0DC162A48F9F200C9FC0A /* shaders */,
 				AE5E4DD92A3F560F00C66C0A /* macos */,
 				AE5E4DD82A3F560F00C66C0A /* Products */,
 				AE5E4DF02A3F701E00C66C0A /* Frameworks */,
@@ -89,6 +92,22 @@
 				AE5E4DF22A3F701E00C66C0A /* MetalKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AED0DC162A48F9F200C9FC0A /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				AED0DC172A48F9F800C9FC0A /* metal */,
+			);
+			path = shaders;
+			sourceTree = "<group>";
+		};
+		AED0DC172A48F9F800C9FC0A /* metal */ = {
+			isa = PBXGroup;
+			children = (
+				AED0DC182A48FA0A00C9FC0A /* quad_batch.metal */,
+			);
+			path = metal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +201,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AED0DC192A48FA0A00C9FC0A /* quad_batch.metal in Sources */,
 				AE5E4DE62A3F561100C66C0A /* main.m in Sources */,
 				AED0DC112A42184D00C9FC0A /* nemo_app.m in Sources */,
 				AE5E4DF92A3F7E5900C66C0A /* some_shaders.metal in Sources */,

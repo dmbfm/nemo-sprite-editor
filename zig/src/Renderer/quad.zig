@@ -4,5 +4,5 @@ pub const VertexData = extern struct {
 };
 
 pub const UniformData = extern struct {
-    color: [3]f32,
+    color: [4]f32,
 };

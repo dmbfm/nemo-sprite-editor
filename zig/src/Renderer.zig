@@ -11,7 +11,7 @@ const dispatch_semaphore_wait = std.c.dispatch_semaphore_wait;
 const dispatch_semaphore_signal = std.c.dispatch_semaphore_signal;
 const DISPATCH_TIME_FOREVER = std.c.DISPATCH_TIME_FOREVER;
 
-pub const MaxQuads = 100_000;
+pub const MaxQuads = 1_000_000;
 pub const MaxTextures = MaxQuads;
 pub const MaxInFlightBuffers = 3;
 
@@ -31,7 +31,7 @@ global_uniform_buffer: [MaxInFlightBuffers]*mtl.Buffer = undefined,
 frame_semaphore: std.c.dispatch_semaphore_t = undefined,
 current_frame_index: usize = 0,
 
-quad_renderer: QuadRenderer(.dumb) = undefined,
+quad_renderer: QuadRenderer(.batched) = undefined,
 
 pub fn init(self: *Renderer, device: *mtl.Device) !void {
     self.device = device;

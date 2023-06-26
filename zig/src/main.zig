@@ -18,7 +18,7 @@ const Nemo = struct {
 
     texture: Renderer.TextureHandle = 0,
 
-    quads: [10_000]Quad = undefined,
+    quads: [Renderer.MaxQuads]Quad = undefined,
 
     pub fn init(self: *Nemo) !void {
         self.device = try mtl.Device.init();
@@ -30,8 +30,8 @@ const Nemo = struct {
             quad.color = Color.random();
             var x: f32 = rnd.floatRange(f32, -10, 10);
             var y: f32 = rnd.floatRange(f32, -10, 10);
-            var w: f32 = rnd.floatRange(f32, 0.1, 2);
-            var h: f32 = rnd.floatRange(f32, 0.1, 2);
+            var w: f32 = 1; //rnd.floatRange(f32, 0.1, 2);
+            var h: f32 = 1; //rnd.floatRange(f32, 0.1, 2);
             quad.position = Vec3f.init(x, y, 0);
             quad.width = w;
             quad.height = h;
@@ -42,8 +42,8 @@ const Nemo = struct {
         for (&self.quads) |*quad| {
             var x: f32 = rnd.floatRange(f32, -10, 10);
             var y: f32 = rnd.floatRange(f32, -10, 10);
-            var w: f32 = rnd.floatRange(f32, 0.1, 2);
-            var h: f32 = rnd.floatRange(f32, 0.1, 2);
+            var w: f32 = 1; //rnd.floatRange(f32, 0.1, 2);
+            var h: f32 = 1; //rnd.floatRange(f32, 0.1, 2);
             quad.position = Vec3f.init(x, y, 0);
             quad.width = w;
             quad.height = h;

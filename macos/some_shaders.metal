@@ -21,7 +21,7 @@ struct VertexOutput {
 
 
 struct FragmentUniformData {
-    float3 color;
+    float4 color;
 };
 
 vertex
@@ -34,6 +34,10 @@ VertexOutput vertex_main( VertexInput in [[ stage_in ]], constant float4x4 &proj
 }
 
 fragment
-float4 frag_main(VertexOutput in [[ stage_in ]], constant FragmentUniformData *uniforms [[ buffer(11)]]) {
-    return float4(uniforms->color, 1);
+float4 frag_main(VertexOutput in [[ stage_in ]],
+                 constant FragmentUniformData &uniforms [[ buffer(11)]]) {
+    return uniforms.color;
 }
+
+
+
