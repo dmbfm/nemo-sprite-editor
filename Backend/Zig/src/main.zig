@@ -2,6 +2,7 @@ const std = @import("std");
 const testing = std.testing;
 const mtl = @import("metal.zig");
 const app = @import("app.zig");
+const Window = @import("window.zig").Window;
 
 const math = @import("math.zig");
 const Vec3f = math.Vec3f;
@@ -13,9 +14,9 @@ const Color = @import("Color.zig");
 const rnd = @import("random.zig");
 
 const Nemo = struct {
+    window: *Window = undefined,
     device: *mtl.Device = undefined,
     renderer: Renderer = .{},
-
     texture: Renderer.TextureHandle = 0,
 
     quads: [Renderer.MaxQuads]Quad = undefined,
@@ -79,7 +80,8 @@ export fn nemoMetalDevice() ?*mtl.Device {
     return nemo.metalDevice();
 }
 
-export fn nemoInit() void {
+export fn nemoInit(window: *Window) void {
+    nemo.window = window;
     nemo.init() catch {
         @panic("nemoInit panic");
     };

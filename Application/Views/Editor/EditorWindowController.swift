@@ -8,5 +8,7 @@
 import AppKit
 
 class EditorWindowController : NSWindowController {
-    
+    override func windowDidLoad() {
+        self.window?.acceptsMouseMovedEvents = true
+    }
 }

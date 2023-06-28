@@ -11,6 +11,11 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
+    
+        let storyboard = NSStoryboard(name: "WelcomeWindow", bundle: nil)
+        let wc: NSWindowController = storyboard.instantiateInitialController()!
+        wc.showWindow(self)
+        
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -18,7 +23,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
-        return true
+        return false
+    }
+    
+    func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool {
+        return false
     }
 }
 

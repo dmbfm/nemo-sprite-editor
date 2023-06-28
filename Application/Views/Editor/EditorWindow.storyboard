@@ -8,7 +8,7 @@
         <!--Window Controller-->
         <scene sceneID="5ax-Vj-n0g">
             <objects>
-                <windowController id="hGf-u9-y1O" customClass="EditorWindowController" customModule="nemosprite" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="EditorWindowController" id="hGf-u9-y1O" customClass="EditorWindowController" customModule="nemosprite" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Mj3-YO-0Nk">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>

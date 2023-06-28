@@ -3,3 +3,4 @@
 //
 
 #import <nemo_zig_lib.h>
+#import <nemo_editor_window.h>

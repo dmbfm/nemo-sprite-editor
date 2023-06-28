@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		AEEBD53C2A4C694200F467DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEBD53B2A4C694200F467DD /* AppDelegate.swift */; };
-		AEEBD53E2A4C694200F467DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEBD53D2A4C694200F467DD /* ViewController.swift */; };
 		AEEBD5402A4C694200F467DD /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEBD53F2A4C694200F467DD /* Document.swift */; };
 		AEEBD5422A4C694400F467DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5412A4C694400F467DD /* Assets.xcassets */; };
 		AEEBD5452A4C694400F467DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5432A4C694400F467DD /* Main.storyboard */; };
@@ -57,12 +56,16 @@
 		AEEBD5B32A4C6F7800F467DD /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEBD5B22A4C6F7800F467DD /* EditorView.swift */; };
 		AEEBD5B52A4C70DD00F467DD /* EditorWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEBD5B42A4C70DD00F467DD /* EditorWindowController.swift */; };
 		AEEBD5B72A4C717500F467DD /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEBD5B62A4C717500F467DD /* EditorViewController.swift */; };
+		AEEBD5BC2A4C87D400F467DD /* WelcomeWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5BB2A4C87D400F467DD /* WelcomeWindow.storyboard */; };
+		AEEBD5BE2A4C87EA00F467DD /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEBD5BD2A4C87EA00F467DD /* WelcomeViewController.swift */; };
+		AEEBD5C02A4C882500F467DD /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEBD5BF2A4C882500F467DD /* WelcomeView.swift */; };
+		AEEBD5CB2A4CABFE00F467DD /* nemo_editor_window.c in Sources */ = {isa = PBXBuildFile; fileRef = AEEBD5CA2A4CABFE00F467DD /* nemo_editor_window.c */; };
+		AEEBD5CD2A4CAC1E00F467DD /* NemoEditorWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEBD5CC2A4CAC1E00F467DD /* NemoEditorWindow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AEEBD5382A4C694200F467DD /* nemosprite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nemosprite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEEBD53B2A4C694200F467DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AEEBD53D2A4C694200F467DD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AEEBD53F2A4C694200F467DD /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		AEEBD5412A4C694400F467DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AEEBD5442A4C694400F467DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -116,6 +119,12 @@
 		AEEBD5B22A4C6F7800F467DD /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
 		AEEBD5B42A4C70DD00F467DD /* EditorWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorWindowController.swift; sourceTree = "<group>"; };
 		AEEBD5B62A4C717500F467DD /* EditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewController.swift; sourceTree = "<group>"; };
+		AEEBD5BB2A4C87D400F467DD /* WelcomeWindow.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WelcomeWindow.storyboard; sourceTree = "<group>"; };
+		AEEBD5BD2A4C87EA00F467DD /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		AEEBD5BF2A4C882500F467DD /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		AEEBD5C92A4CABFE00F467DD /* nemo_editor_window.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nemo_editor_window.h; sourceTree = "<group>"; };
+		AEEBD5CA2A4CABFE00F467DD /* nemo_editor_window.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = nemo_editor_window.c; sourceTree = "<group>"; };
+		AEEBD5CC2A4CAC1E00F467DD /* NemoEditorWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NemoEditorWindow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +146,7 @@
 			children = (
 				AEEBD53A2A4C694200F467DD /* Application */,
 				AEEBD5522A4C6BE100F467DD /* Metal */,
+				AEEBD5C52A4CABB900F467DD /* Shared */,
 				AEEBD54F2A4C6AEE00F467DD /* Backend */,
 				AEEBD5392A4C694200F467DD /* Products */,
 				AEEBD5A82A4C6DF300F467DD /* Frameworks */,
@@ -155,7 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				AEEBD53B2A4C694200F467DD /* AppDelegate.swift */,
-				AEEBD53D2A4C694200F467DD /* ViewController.swift */,
 				AEEBD53F2A4C694200F467DD /* Document.swift */,
 				AEEBD5552A4C6C6200F467DD /* Bridging-Header.h */,
 				AEEBD5B82A4C718200F467DD /* Views */,
@@ -298,6 +307,7 @@
 		AEEBD5B82A4C718200F467DD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AEEBD5BA2A4C87BE00F467DD /* Welcome */,
 				AEEBD5B92A4C718900F467DD /* Editor */,
 			);
 			path = Views;
@@ -312,6 +322,34 @@
 				AEEBD5B02A4C6F5E00F467DD /* EditorWindow.storyboard */,
 			);
 			path = Editor;
+			sourceTree = "<group>";
+		};
+		AEEBD5BA2A4C87BE00F467DD /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				AEEBD5BB2A4C87D400F467DD /* WelcomeWindow.storyboard */,
+				AEEBD5BD2A4C87EA00F467DD /* WelcomeViewController.swift */,
+				AEEBD5BF2A4C882500F467DD /* WelcomeView.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		AEEBD5C52A4CABB900F467DD /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				AEEBD5CE2A4CACEA00F467DD /* Include */,
+				AEEBD5CA2A4CABFE00F467DD /* nemo_editor_window.c */,
+				AEEBD5CC2A4CAC1E00F467DD /* NemoEditorWindow.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		AEEBD5CE2A4CACEA00F467DD /* Include */ = {
+			isa = PBXGroup;
+			children = (
+				AEEBD5C92A4CABFE00F467DD /* nemo_editor_window.h */,
+			);
+			path = Include;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -385,6 +423,7 @@
 				AEEBD5862A4C6D0700F467DD /* quad_renderer.zig in Resources */,
 				AEEBD58E2A4C6D0700F467DD /* library.zig in Resources */,
 				AEEBD58B2A4C6D0700F467DD /* vertex_descriptor.zig in Resources */,
+				AEEBD5BC2A4C87D400F467DD /* WelcomeWindow.storyboard in Resources */,
 				AEEBD5942A4C6D0700F467DD /* render_pass_descriptor.zig in Resources */,
 				AEEBD5932A4C6D0700F467DD /* render_command_encoder.zig in Resources */,
 				AEEBD58A2A4C6D0700F467DD /* tests.zig in Resources */,
@@ -443,15 +482,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEEBD5BE2A4C87EA00F467DD /* WelcomeViewController.swift in Sources */,
+				AEEBD5CB2A4CABFE00F467DD /* nemo_editor_window.c in Sources */,
 				AEEBD55C2A4C6CE600F467DD /* some_shaders.metal in Sources */,
 				AEEBD5B72A4C717500F467DD /* EditorViewController.swift in Sources */,
 				AEEBD55A2A4C6CD600F467DD /* quad_batch.metal in Sources */,
 				AEEBD5B52A4C70DD00F467DD /* EditorWindowController.swift in Sources */,
-				AEEBD53E2A4C694200F467DD /* ViewController.swift in Sources */,
+				AEEBD5C02A4C882500F467DD /* WelcomeView.swift in Sources */,
 				AEEBD5B32A4C6F7800F467DD /* EditorView.swift in Sources */,
 				AEEBD53C2A4C694200F467DD /* AppDelegate.swift in Sources */,
 				AEEBD5402A4C694200F467DD /* Document.swift in Sources */,
 				AEEBD5582A4C6C6200F467DD /* metal_bindings.m in Sources */,
+				AEEBD5CD2A4CAC1E00F467DD /* NemoEditorWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,7 +561,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = Backend/Include;
+				HEADER_SEARCH_PATHS = (
+					Backend/Include,
+					Shared/Include,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -574,7 +619,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = Backend/Include;
+				HEADER_SEARCH_PATHS = (
+					Backend/Include,
+					Shared/Include,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
