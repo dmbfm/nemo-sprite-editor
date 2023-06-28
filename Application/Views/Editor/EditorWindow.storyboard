@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="hGf-u9-y1O">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="5ax-Vj-n0g">
+            <objects>
+                <windowController id="hGf-u9-y1O" customClass="EditorWindowController" customModule="nemosprite" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Mj3-YO-0Nk">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="294" y="313" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
+                        <view key="contentView" id="1uz-6H-txW">
+                            <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </view>
+                        <connections>
+                            <outlet property="delegate" destination="hGf-u9-y1O" id="pCr-h3-Sf7"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="8sC-Eb-nD0" kind="relationship" relationship="window.shadowedContentViewController" id="ICY-06-Iaf"/>
+                    </connections>
+                </windowController>
+                <customObject id="WpQ-un-ctj" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-74" y="82"/>
+        </scene>
+        <!--Editor View Controller-->
+        <scene sceneID="QJO-Sz-ioj">
+            <objects>
+                <viewController id="8sC-Eb-nD0" customClass="EditorViewController" customModule="nemosprite" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="zNc-iK-d2X" customClass="EditorView" customModule="nemosprite" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="9s3-KE-9V7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-74" y="486"/>
+        </scene>
+    </scenes>
+</document>
