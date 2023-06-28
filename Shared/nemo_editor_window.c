@@ -16,13 +16,15 @@ double nemo_NemoEditorWindow_mouseY(nemo_NemoEditorWindow *self) {
 }
 
 const void *nemo_NemoEditorWindow_currentRenderPassDescriptor(nemo_NemoEditorWindow *self) {
-    return self->current_render_pass_descriptor;
+    return self->current_render_pass_descriptor_callback(self->platform_data);
 }
 
 const void *nemo_NemoEditorWindow_currentDrawable(nemo_NemoEditorWindow *self) {
-    return self->current_drawable;
+    return self->current_drawable_callback(self->platform_data);
 }
 
 void nemo_NemoEditorWindow_setClearColor(nemo_NemoEditorWindow *self, ClearColor color) {
     self->clear_color = color;
 }
+
+

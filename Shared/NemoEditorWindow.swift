@@ -10,40 +10,7 @@ import MetalKit
 
 class NemoEditorWindow {
     var inner: nemo_NemoEditorWindow
-    
-    var mouse: nemo_NemoEditorWindow.__Unnamed_struct_mouse {
-        get {
-            self.inner.mouse
-        }
-        
-        set {
-            self.inner.mouse = newValue
-        }
-    }
-    
-    var currentDrawable: MTLDrawable {
-        get {
-            return self.inner.current_drawable.bindMemory(to: MTLDrawable.self, capacity: 1).pointee
-        }
-        set {
-            withUnsafePointer(to: newValue) { ptr in
-                var rawPtr = UnsafeRawPointer(ptr)
-                self.inner.current_drawable = rawPtr
-            }
-        }
-    }
-    
-    var currentRenderPassDescriptor: MTLRenderPassDescriptor {
-        get {
-            return self.inner.current_render_pass_descriptor.bindMemory(to: MTLRenderPassDescriptor.self, capacity: 1).pointee
-        }
-        set {
-            withUnsafePointer(to: newValue) { ptr in
-                var rawPtr = UnsafeRawPointer(ptr)
-                self.inner.current_render_pass_descriptor = rawPtr
-            }
-        }
-    }
+    var view: EditorView
     
     var clearColor: MTLClearColor {
         get {
@@ -56,11 +23,40 @@ class NemoEditorWindow {
         }
     }
     
-    init() {
+    init(view: EditorView) {
         self.inner = nemo_NemoEditorWindow()
         self.inner.mouse.x = 100
         self.inner.mouse.y = 200
+        self.view = view
+        
+        withUnsafePointer(to: self) { ptr in
+            let rawptr = UnsafeMutableRawPointer(mutating: ptr)
+            self.inner.platform_data = rawptr
+        }
+        
+        self.inner.current_render_pass_descriptor_callback =  { ptr in
+            let _self = ptr?.bindMemory(to: NemoEditorWindow.self, capacity: 1).pointee
+            if let view = _self?.view, let rpd = view.currentRenderPassDescriptor {
+                return withUnsafePointer(to: rpd) { ptr in
+                    UnsafeRawPointer(ptr)
+                }
+            }
+            
+            return nil
+        }
+        
+        self.inner.current_drawable_callback = { ptr in
+            let _self = ptr?.bindMemory(to: NemoEditorWindow.self, capacity: 1).pointee
+            if let view = _self?.view, let rpd = view.currentDrawable {
+                return withUnsafePointer(to: rpd) { ptr in
+                    UnsafeRawPointer(ptr)
+                }
+            }
+            
+            return nil
+        }
     }
+    
 }
 
 extension NemoEditorWindow {

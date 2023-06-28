@@ -5,7 +5,7 @@
 
 void nemoInit(nemo_NemoEditorWindow *);
 void nemoDeinit(void);
-void nemoFrame(void);
-void *nemoMetalDevice(void);
+void nemoFrame(nemo_NemoEditorWindow *);
+void *nemoMetalDevice(nemo_NemoEditorWindow *);
 
 #endif

@@ -19,8 +19,15 @@ typedef struct nemo_NemoEditorWindow {
     } mouse;
     
     ClearColor clear_color;
-    const void *current_render_pass_descriptor;
-    const void *current_drawable;
+    
+    
+    const void* (*current_render_pass_descriptor_callback)(void *platform_data);
+    const void* (*current_drawable_callback)(void *platform_data);
+    
+    void *platform_data;
+    
+//    const void *current_render_pass_descriptor;
+//    const void *current_drawable;
     
 } nemo_NemoEditorWindow;
 

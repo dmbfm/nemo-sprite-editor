@@ -3,9 +3,9 @@ const Quad = @import("Quad.zig");
 const Renderer = @This();
 const Camera = @import("Camera.zig");
 const mtl = @import("metal.zig");
-const app = @import("app.zig");
 const Pool = @import("pool.zig").Pool;
 const QuadRenderer = @import("Renderer/quad_renderer.zig").QuadRenderer;
+const Window = @import("window.zig").Window;
 const dispatch_semaphore_create = std.c.dispatch_semaphore_create;
 const dispatch_semaphore_wait = std.c.dispatch_semaphore_wait;
 const dispatch_semaphore_signal = std.c.dispatch_semaphore_signal;
@@ -21,6 +21,7 @@ pub const BufferIndexGlobals = 22;
 
 pub const TextureHandle = usize;
 
+window: *Window = undefined,
 library: *mtl.Library = undefined,
 device: *mtl.Device = undefined,
 command_queue: *mtl.CommandQueue = undefined,
@@ -33,7 +34,8 @@ current_frame_index: usize = 0,
 
 quad_renderer: QuadRenderer(.batched) = undefined,
 
-pub fn init(self: *Renderer, device: *mtl.Device) !void {
+pub fn init(self: *Renderer, device: *mtl.Device, window: *Window) !void {
+    self.window = window;
     self.device = device;
     self.library = try device.newDefaultLibrary();
     self.command_queue = try device.newCommandQueue();
@@ -66,13 +68,13 @@ pub fn drawQuads(
     }
 
     var command_buffer = try self.command_queue.commandBuffer();
-    var render_pass_descriptor = try app.currentRenderPassDescriptor();
+    var render_pass_descriptor = self.window.currentRenderPassDescriptor().?; //try app.currentRenderPassDescriptor();
     var encoder = try command_buffer.renderCommandEncoderWithDescriptor(render_pass_descriptor);
     encoder.setVertexBuffer(self.global_uniform_buffer[idx], 0, BufferIndexGlobals);
 
     try self.quad_renderer.drawQuads(self, quadlist, encoder);
 
-    var drawable = try app.currentDrawable();
+    var drawable = self.window.currentDrawable().?;
     encoder.endEncoding();
 
     command_buffer.addCompletedHandler(Renderer, &commandBufferCompletedHandler, self);

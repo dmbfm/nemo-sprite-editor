@@ -1,7 +1,6 @@
 const std = @import("std");
 const testing = std.testing;
 const mtl = @import("metal.zig");
-const app = @import("app.zig");
 const Window = @import("window.zig").Window;
 
 const math = @import("math.zig");
@@ -23,7 +22,7 @@ const Nemo = struct {
 
     pub fn init(self: *Nemo) !void {
         self.device = try mtl.Device.init();
-        try self.renderer.init(self.device);
+        try self.renderer.init(self.device, self.window);
         self.texture = try self.renderer.textureNew(100, 100);
 
         // init quads
@@ -52,7 +51,7 @@ const Nemo = struct {
     }
 
     pub fn frame(self: *Nemo) !void {
-        app.setClearColor(mtl.ClearColor.init(1, 1, 1, 1));
+        self.window.setClearColor(mtl.ClearColor.init(1, 1, 1, 1));
 
         var camera = Camera.init(Vec3f.init(0, 0, 1), 10, 10, 0.1, 1000);
         camera.updateMatrix();
