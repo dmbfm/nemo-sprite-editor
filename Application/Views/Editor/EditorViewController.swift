@@ -11,6 +11,7 @@ class EditorViewController : NSViewController {
     
     var editorView: EditorView!
     var nemoEditorWindow: NemoEditorWindow!
+    var nemoInstanceHandle: UInt64 = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,16 +24,21 @@ class EditorViewController : NSViewController {
         
         self.editorView.controller = self
         self.nemoEditorWindow = NemoEditorWindow(view: self.editorView)
+    
+        self.nemoInstanceHandle = nemoBackendCreateInstance(self.nemoEditorWindow.innerPtr())
         
-//        self.nemoEditorWindow = NemoEditorWindow() {
-//            return self.editorView.currentDrawable
-//        } currentRenderPassDescriptorCallback: {
-//            return self.editorView.currentRenderPassDescriptor
-//        }
+        if (self.nemoInstanceHandle == 0) {
+            fatalError("Failed to create NEMO instance!")
+        }
         
-        nemoInit(self.nemoEditorWindow.innerPtr())
     }
     
+    deinit {
+        if (self.nemoInstanceHandle != 0) {
+            nemoBackendDestroyInstance(self.nemoInstanceHandle)
+        }
+    }
+        
     override func viewDidAppear() {
         self.view.window?.acceptsMouseMovedEvents = true
     }

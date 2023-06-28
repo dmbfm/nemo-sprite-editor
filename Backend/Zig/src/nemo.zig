@@ -1,28 +1,27 @@
 const std = @import("std");
-const GeneralPurposeAllocator = std.heap.GeneralPurposeAllocator;
+const mtl = @import("metal.zig");
+const Window = @import("window.zig").Window;
 
-var gpa: GeneralPurposeAllocator(.{}) = undefined;
-var nemo_list: std.ArrayList(Nemo) = undefined;
+const Self = @This();
 
-pub const Nemo = struct {};
+window: *Window = undefined,
+device: *mtl.Device = undefined,
 
-export fn nemoGlobalInit() c_int {
-    gpa = GeneralPurposeAllocator(.{}){};
-
-    const allocator = gpa.allocator();
-
-    nemo_list = std.ArrayList(Nemo).initCapacity(allocator, 10) catch {
-        return -1;
-    };
-
-    return 0;
+pub fn init(self: *Self, window: *Window) !void {
+    self.window = window;
+    self.device = try mtl.Device.init();
 }
 
-export fn nemoGlobalDeinit() c_int {
-    _ = gpa.detectLeaks();
-    _ = gpa.deinit();
+pub fn deinit(self: *Self) void {
+    self.device.deinit();
+}
 
-    return 0;
+pub fn getMetalDevice(self: *Self) *mtl.Device {
+    return self.device;
+}
+
+pub fn frame(self: *Self) !void {
+    _ = self;
 }
 
 test {}

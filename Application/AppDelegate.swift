@@ -10,8 +10,8 @@ import Cocoa
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
-    
+        nemoBackendInit()
+        
         let storyboard = NSStoryboard(name: "WelcomeWindow", bundle: nil)
         let wc: NSWindowController = storyboard.instantiateInitialController()!
         wc.showWindow(self)
@@ -19,7 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+        nemoBackendDeinit();
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {

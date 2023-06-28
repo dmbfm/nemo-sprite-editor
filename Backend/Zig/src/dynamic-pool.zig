@@ -62,7 +62,7 @@ pub fn DynamicPool(comptime T: type) type {
                     s.ptr = try self.allocator.create(T);
 
                     // Return encoded key
-                    var key = Key{ .index = @intCast(u32, idx), .generation = s.generation };
+                    var key = Key{ .index = @intCast(u32, idx + 1), .generation = s.generation };
                     return key.encode();
                 }
             }
@@ -75,7 +75,7 @@ pub fn DynamicPool(comptime T: type) type {
             };
             try self.slots.append(slot);
 
-            var key = Key{ .index = @intCast(u32, self.slots.items.len - 1), .generation = 0 };
+            var key = Key{ .index = @intCast(u32, self.slots.items.len), .generation = 0 };
             return key.encode();
         }
 
@@ -93,11 +93,11 @@ pub fn DynamicPool(comptime T: type) type {
         }
 
         fn getSlot(self: *Self, key: Key) ?*Slot {
-            if (key.index >= self.slots.items.len) {
+            if (key.index == 0 or key.index > self.slots.items.len) {
                 return null;
             }
 
-            return &self.slots.items[key.index];
+            return &self.slots.items[key.index - 1];
         }
 
         pub fn get(self: *Self, handle: u64) ?*T {
@@ -139,9 +139,9 @@ test "Pool" {
     var b = try pool.alloc();
     var c = try pool.alloc();
 
-    try std.testing.expect(a == 0);
-    try std.testing.expect(b == 1);
-    try std.testing.expect(c == 2);
+    try std.testing.expect(a == 1);
+    try std.testing.expect(b == 2);
+    try std.testing.expect(c == 3);
 
     {
         var aptr = pool.get(a).?;
@@ -174,13 +174,13 @@ test "Pool" {
 
         var key = Pool.Key.decode(d);
         try std.testing.expect(key.generation == 1);
-        try std.testing.expect(key.index == 0);
+        try std.testing.expect(key.index == 1);
 
         var e = try pool.alloc();
 
         key = Pool.Key.decode(e);
         try std.testing.expect(key.generation == 0);
-        try std.testing.expect(key.index == 3);
+        try std.testing.expect(key.index == 4);
 
         pool.free(d);
         pool.free(e);

@@ -14,41 +14,6 @@
 		AEEBD5582A4C6C6200F467DD /* metal_bindings.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEBD5572A4C6C6200F467DD /* metal_bindings.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		AEEBD55A2A4C6CD600F467DD /* quad_batch.metal in Sources */ = {isa = PBXBuildFile; fileRef = AEEBD5592A4C6CD600F467DD /* quad_batch.metal */; };
 		AEEBD55C2A4C6CE600F467DD /* some_shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = AEEBD55B2A4C6CE600F467DD /* some_shaders.metal */; };
-		AEEBD5852A4C6D0700F467DD /* pool.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD55E2A4C6D0600F467DD /* pool.zig */; };
-		AEEBD5862A4C6D0700F467DD /* quad_renderer.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5602A4C6D0600F467DD /* quad_renderer.zig */; };
-		AEEBD5872A4C6D0700F467DD /* QuadRendererBatched.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5612A4C6D0600F467DD /* QuadRendererBatched.zig */; };
-		AEEBD5882A4C6D0700F467DD /* QuadRendererDumb.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5622A4C6D0600F467DD /* QuadRendererDumb.zig */; };
-		AEEBD5892A4C6D0700F467DD /* quad.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5632A4C6D0600F467DD /* quad.zig */; };
-		AEEBD58A2A4C6D0700F467DD /* tests.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5642A4C6D0600F467DD /* tests.zig */; };
-		AEEBD58B2A4C6D0700F467DD /* vertex_descriptor.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5662A4C6D0600F467DD /* vertex_descriptor.zig */; };
-		AEEBD58C2A4C6D0700F467DD /* render_pipeline_state.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5672A4C6D0600F467DD /* render_pipeline_state.zig */; };
-		AEEBD58D2A4C6D0700F467DD /* enums.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5682A4C6D0600F467DD /* enums.zig */; };
-		AEEBD58E2A4C6D0700F467DD /* library.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5692A4C6D0600F467DD /* library.zig */; };
-		AEEBD58F2A4C6D0700F467DD /* function.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD56A2A4C6D0600F467DD /* function.zig */; };
-		AEEBD5902A4C6D0700F467DD /* structs.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD56B2A4C6D0600F467DD /* structs.zig */; };
-		AEEBD5912A4C6D0700F467DD /* command_queue.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD56C2A4C6D0600F467DD /* command_queue.zig */; };
-		AEEBD5922A4C6D0700F467DD /* buffer.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD56D2A4C6D0700F467DD /* buffer.zig */; };
-		AEEBD5932A4C6D0700F467DD /* render_command_encoder.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD56E2A4C6D0700F467DD /* render_command_encoder.zig */; };
-		AEEBD5942A4C6D0700F467DD /* render_pass_descriptor.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD56F2A4C6D0700F467DD /* render_pass_descriptor.zig */; };
-		AEEBD5952A4C6D0700F467DD /* command_buffer.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5702A4C6D0700F467DD /* command_buffer.zig */; };
-		AEEBD5962A4C6D0700F467DD /* drawable.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5712A4C6D0700F467DD /* drawable.zig */; };
-		AEEBD5972A4C6D0700F467DD /* device.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5722A4C6D0700F467DD /* device.zig */; };
-		AEEBD5982A4C6D0700F467DD /* texture.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5732A4C6D0700F467DD /* texture.zig */; };
-		AEEBD5992A4C6D0700F467DD /* render_pipeline_descriptor.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5742A4C6D0700F467DD /* render_pipeline_descriptor.zig */; };
-		AEEBD59A2A4C6D0700F467DD /* texture_descriptor.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5752A4C6D0700F467DD /* texture_descriptor.zig */; };
-		AEEBD59B2A4C6D0700F467DD /* app.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5762A4C6D0700F467DD /* app.zig */; };
-		AEEBD59C2A4C6D0700F467DD /* metal.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5772A4C6D0700F467DD /* metal.zig */; };
-		AEEBD59D2A4C6D0700F467DD /* Renderer.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5782A4C6D0700F467DD /* Renderer.zig */; };
-		AEEBD59E2A4C6D0700F467DD /* main.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5792A4C6D0700F467DD /* main.zig */; };
-		AEEBD59F2A4C6D0700F467DD /* Palette.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD57A2A4C6D0700F467DD /* Palette.zig */; };
-		AEEBD5A02A4C6D0700F467DD /* Rgb.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD57B2A4C6D0700F467DD /* Rgb.zig */; };
-		AEEBD5A12A4C6D0700F467DD /* Camera.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD57C2A4C6D0700F467DD /* Camera.zig */; };
-		AEEBD5A22A4C6D0700F467DD /* Bitmap.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD57D2A4C6D0700F467DD /* Bitmap.zig */; };
-		AEEBD5A32A4C6D0700F467DD /* Color.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD57E2A4C6D0700F467DD /* Color.zig */; };
-		AEEBD5A42A4C6D0700F467DD /* Quad.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD57F2A4C6D0700F467DD /* Quad.zig */; };
-		AEEBD5A52A4C6D0700F467DD /* random.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5802A4C6D0700F467DD /* random.zig */; };
-		AEEBD5A62A4C6D0700F467DD /* math.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5812A4C6D0700F467DD /* math.zig */; };
-		AEEBD5A72A4C6D0700F467DD /* build.zig in Resources */ = {isa = PBXBuildFile; fileRef = AEEBD5822A4C6D0700F467DD /* build.zig */; };
 		AEEBD5AB2A4C6DF400F467DD /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEBD5A92A4C6DF400F467DD /* MetalKit.framework */; };
 		AEEBD5AC2A4C6DF400F467DD /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEBD5AA2A4C6DF400F467DD /* Metal.framework */; };
 		AEEBD5AE2A4C6E0F00F467DD /* libzig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEBD5AD2A4C6E0000F467DD /* libzig.a */; };
@@ -76,41 +41,6 @@
 		AEEBD5572A4C6C6200F467DD /* metal_bindings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = metal_bindings.m; sourceTree = "<group>"; };
 		AEEBD5592A4C6CD600F467DD /* quad_batch.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = quad_batch.metal; sourceTree = "<group>"; };
 		AEEBD55B2A4C6CE600F467DD /* some_shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = some_shaders.metal; sourceTree = "<group>"; };
-		AEEBD55E2A4C6D0600F467DD /* pool.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pool.zig; sourceTree = "<group>"; };
-		AEEBD5602A4C6D0600F467DD /* quad_renderer.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = quad_renderer.zig; sourceTree = "<group>"; };
-		AEEBD5612A4C6D0600F467DD /* QuadRendererBatched.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = QuadRendererBatched.zig; sourceTree = "<group>"; };
-		AEEBD5622A4C6D0600F467DD /* QuadRendererDumb.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = QuadRendererDumb.zig; sourceTree = "<group>"; };
-		AEEBD5632A4C6D0600F467DD /* quad.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = quad.zig; sourceTree = "<group>"; };
-		AEEBD5642A4C6D0600F467DD /* tests.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tests.zig; sourceTree = "<group>"; };
-		AEEBD5662A4C6D0600F467DD /* vertex_descriptor.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex_descriptor.zig; sourceTree = "<group>"; };
-		AEEBD5672A4C6D0600F467DD /* render_pipeline_state.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = render_pipeline_state.zig; sourceTree = "<group>"; };
-		AEEBD5682A4C6D0600F467DD /* enums.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enums.zig; sourceTree = "<group>"; };
-		AEEBD5692A4C6D0600F467DD /* library.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = library.zig; sourceTree = "<group>"; };
-		AEEBD56A2A4C6D0600F467DD /* function.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = function.zig; sourceTree = "<group>"; };
-		AEEBD56B2A4C6D0600F467DD /* structs.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = structs.zig; sourceTree = "<group>"; };
-		AEEBD56C2A4C6D0600F467DD /* command_queue.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = command_queue.zig; sourceTree = "<group>"; };
-		AEEBD56D2A4C6D0700F467DD /* buffer.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = buffer.zig; sourceTree = "<group>"; };
-		AEEBD56E2A4C6D0700F467DD /* render_command_encoder.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = render_command_encoder.zig; sourceTree = "<group>"; };
-		AEEBD56F2A4C6D0700F467DD /* render_pass_descriptor.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = render_pass_descriptor.zig; sourceTree = "<group>"; };
-		AEEBD5702A4C6D0700F467DD /* command_buffer.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = command_buffer.zig; sourceTree = "<group>"; };
-		AEEBD5712A4C6D0700F467DD /* drawable.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drawable.zig; sourceTree = "<group>"; };
-		AEEBD5722A4C6D0700F467DD /* device.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = device.zig; sourceTree = "<group>"; };
-		AEEBD5732A4C6D0700F467DD /* texture.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = texture.zig; sourceTree = "<group>"; };
-		AEEBD5742A4C6D0700F467DD /* render_pipeline_descriptor.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = render_pipeline_descriptor.zig; sourceTree = "<group>"; };
-		AEEBD5752A4C6D0700F467DD /* texture_descriptor.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = texture_descriptor.zig; sourceTree = "<group>"; };
-		AEEBD5762A4C6D0700F467DD /* app.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = app.zig; sourceTree = "<group>"; };
-		AEEBD5772A4C6D0700F467DD /* metal.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = metal.zig; sourceTree = "<group>"; };
-		AEEBD5782A4C6D0700F467DD /* Renderer.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Renderer.zig; sourceTree = "<group>"; };
-		AEEBD5792A4C6D0700F467DD /* main.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.zig; sourceTree = "<group>"; };
-		AEEBD57A2A4C6D0700F467DD /* Palette.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Palette.zig; sourceTree = "<group>"; };
-		AEEBD57B2A4C6D0700F467DD /* Rgb.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Rgb.zig; sourceTree = "<group>"; };
-		AEEBD57C2A4C6D0700F467DD /* Camera.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Camera.zig; sourceTree = "<group>"; };
-		AEEBD57D2A4C6D0700F467DD /* Bitmap.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Bitmap.zig; sourceTree = "<group>"; };
-		AEEBD57E2A4C6D0700F467DD /* Color.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Color.zig; sourceTree = "<group>"; };
-		AEEBD57F2A4C6D0700F467DD /* Quad.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Quad.zig; sourceTree = "<group>"; };
-		AEEBD5802A4C6D0700F467DD /* random.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = random.zig; sourceTree = "<group>"; };
-		AEEBD5812A4C6D0700F467DD /* math.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = math.zig; sourceTree = "<group>"; };
-		AEEBD5822A4C6D0700F467DD /* build.zig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = build.zig; sourceTree = "<group>"; };
 		AEEBD5842A4C6D0700F467DD /* nemo_zig_lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nemo_zig_lib.h; sourceTree = "<group>"; };
 		AEEBD5A92A4C6DF400F467DD /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		AEEBD5AA2A4C6DF400F467DD /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
@@ -204,8 +134,6 @@
 		AEEBD5512A4C6B8800F467DD /* Zig */ = {
 			isa = PBXGroup;
 			children = (
-				AEEBD5822A4C6D0700F467DD /* build.zig */,
-				AEEBD55D2A4C6D0600F467DD /* src */,
 			);
 			path = Zig;
 			sourceTree = "<group>";
@@ -235,63 +163,6 @@
 				AEEBD5572A4C6C6200F467DD /* metal_bindings.m */,
 			);
 			path = Bindings;
-			sourceTree = "<group>";
-		};
-		AEEBD55D2A4C6D0600F467DD /* src */ = {
-			isa = PBXGroup;
-			children = (
-				AEEBD55E2A4C6D0600F467DD /* pool.zig */,
-				AEEBD55F2A4C6D0600F467DD /* Renderer */,
-				AEEBD5642A4C6D0600F467DD /* tests.zig */,
-				AEEBD5652A4C6D0600F467DD /* metal */,
-				AEEBD5762A4C6D0700F467DD /* app.zig */,
-				AEEBD5772A4C6D0700F467DD /* metal.zig */,
-				AEEBD5782A4C6D0700F467DD /* Renderer.zig */,
-				AEEBD5792A4C6D0700F467DD /* main.zig */,
-				AEEBD57A2A4C6D0700F467DD /* Palette.zig */,
-				AEEBD57B2A4C6D0700F467DD /* Rgb.zig */,
-				AEEBD57C2A4C6D0700F467DD /* Camera.zig */,
-				AEEBD57D2A4C6D0700F467DD /* Bitmap.zig */,
-				AEEBD57E2A4C6D0700F467DD /* Color.zig */,
-				AEEBD57F2A4C6D0700F467DD /* Quad.zig */,
-				AEEBD5802A4C6D0700F467DD /* random.zig */,
-				AEEBD5812A4C6D0700F467DD /* math.zig */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		AEEBD55F2A4C6D0600F467DD /* Renderer */ = {
-			isa = PBXGroup;
-			children = (
-				AEEBD5602A4C6D0600F467DD /* quad_renderer.zig */,
-				AEEBD5612A4C6D0600F467DD /* QuadRendererBatched.zig */,
-				AEEBD5622A4C6D0600F467DD /* QuadRendererDumb.zig */,
-				AEEBD5632A4C6D0600F467DD /* quad.zig */,
-			);
-			path = Renderer;
-			sourceTree = "<group>";
-		};
-		AEEBD5652A4C6D0600F467DD /* metal */ = {
-			isa = PBXGroup;
-			children = (
-				AEEBD5662A4C6D0600F467DD /* vertex_descriptor.zig */,
-				AEEBD5672A4C6D0600F467DD /* render_pipeline_state.zig */,
-				AEEBD5682A4C6D0600F467DD /* enums.zig */,
-				AEEBD5692A4C6D0600F467DD /* library.zig */,
-				AEEBD56A2A4C6D0600F467DD /* function.zig */,
-				AEEBD56B2A4C6D0600F467DD /* structs.zig */,
-				AEEBD56C2A4C6D0600F467DD /* command_queue.zig */,
-				AEEBD56D2A4C6D0700F467DD /* buffer.zig */,
-				AEEBD56E2A4C6D0700F467DD /* render_command_encoder.zig */,
-				AEEBD56F2A4C6D0700F467DD /* render_pass_descriptor.zig */,
-				AEEBD5702A4C6D0700F467DD /* command_buffer.zig */,
-				AEEBD5712A4C6D0700F467DD /* drawable.zig */,
-				AEEBD5722A4C6D0700F467DD /* device.zig */,
-				AEEBD5732A4C6D0700F467DD /* texture.zig */,
-				AEEBD5742A4C6D0700F467DD /* render_pipeline_descriptor.zig */,
-				AEEBD5752A4C6D0700F467DD /* texture_descriptor.zig */,
-			);
-			path = metal;
 			sourceTree = "<group>";
 		};
 		AEEBD5A82A4C6DF300F467DD /* Frameworks */ = {
@@ -413,44 +284,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEEBD5422A4C694400F467DD /* Assets.xcassets in Resources */,
-				AEEBD5A32A4C6D0700F467DD /* Color.zig in Resources */,
-				AEEBD5A62A4C6D0700F467DD /* math.zig in Resources */,
 				AEEBD5452A4C694400F467DD /* Main.storyboard in Resources */,
-				AEEBD5982A4C6D0700F467DD /* texture.zig in Resources */,
-				AEEBD5882A4C6D0700F467DD /* QuadRendererDumb.zig in Resources */,
-				AEEBD5A12A4C6D0700F467DD /* Camera.zig in Resources */,
-				AEEBD5992A4C6D0700F467DD /* render_pipeline_descriptor.zig in Resources */,
-				AEEBD5862A4C6D0700F467DD /* quad_renderer.zig in Resources */,
-				AEEBD58E2A4C6D0700F467DD /* library.zig in Resources */,
-				AEEBD58B2A4C6D0700F467DD /* vertex_descriptor.zig in Resources */,
 				AEEBD5BC2A4C87D400F467DD /* WelcomeWindow.storyboard in Resources */,
-				AEEBD5942A4C6D0700F467DD /* render_pass_descriptor.zig in Resources */,
-				AEEBD5932A4C6D0700F467DD /* render_command_encoder.zig in Resources */,
-				AEEBD58A2A4C6D0700F467DD /* tests.zig in Resources */,
-				AEEBD5952A4C6D0700F467DD /* command_buffer.zig in Resources */,
-				AEEBD59F2A4C6D0700F467DD /* Palette.zig in Resources */,
-				AEEBD5962A4C6D0700F467DD /* drawable.zig in Resources */,
-				AEEBD59E2A4C6D0700F467DD /* main.zig in Resources */,
 				AEEBD5B12A4C6F5E00F467DD /* EditorWindow.storyboard in Resources */,
-				AEEBD58C2A4C6D0700F467DD /* render_pipeline_state.zig in Resources */,
-				AEEBD5972A4C6D0700F467DD /* device.zig in Resources */,
-				AEEBD5852A4C6D0700F467DD /* pool.zig in Resources */,
-				AEEBD5912A4C6D0700F467DD /* command_queue.zig in Resources */,
-				AEEBD59B2A4C6D0700F467DD /* app.zig in Resources */,
-				AEEBD59D2A4C6D0700F467DD /* Renderer.zig in Resources */,
-				AEEBD59C2A4C6D0700F467DD /* metal.zig in Resources */,
-				AEEBD5892A4C6D0700F467DD /* quad.zig in Resources */,
-				AEEBD5A42A4C6D0700F467DD /* Quad.zig in Resources */,
-				AEEBD5872A4C6D0700F467DD /* QuadRendererBatched.zig in Resources */,
-				AEEBD5A02A4C6D0700F467DD /* Rgb.zig in Resources */,
-				AEEBD5922A4C6D0700F467DD /* buffer.zig in Resources */,
-				AEEBD58F2A4C6D0700F467DD /* function.zig in Resources */,
-				AEEBD59A2A4C6D0700F467DD /* texture_descriptor.zig in Resources */,
-				AEEBD5A72A4C6D0700F467DD /* build.zig in Resources */,
-				AEEBD58D2A4C6D0700F467DD /* enums.zig in Resources */,
-				AEEBD5902A4C6D0700F467DD /* structs.zig in Resources */,
-				AEEBD5A22A4C6D0700F467DD /* Bitmap.zig in Resources */,
-				AEEBD5A52A4C6D0700F467DD /* random.zig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

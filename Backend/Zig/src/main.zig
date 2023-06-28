@@ -1,99 +1,59 @@
 const std = @import("std");
-const testing = std.testing;
 const mtl = @import("metal.zig");
+const GeneralPurposeAllocator = std.heap.GeneralPurposeAllocator;
+const DynamicPool = @import("dynamic-pool.zig").DynamicPool;
+const Nemo = @import("nemo.zig");
 const Window = @import("window.zig").Window;
 
-const math = @import("math.zig");
-const Vec3f = math.Vec3f;
-const Mat4f = math.Mat4f;
-const Camera = @import("Camera.zig");
-const Quad = @import("Quad.zig");
-const Renderer = @import("Renderer.zig");
-const Color = @import("Color.zig");
-const rnd = @import("random.zig");
+var gpa: GeneralPurposeAllocator(.{}) = undefined;
+var nemo_pool: DynamicPool(Nemo) = undefined;
 
-const Nemo = struct {
-    window: *Window = undefined,
-    device: *mtl.Device = undefined,
-    renderer: Renderer = .{},
-    texture: Renderer.TextureHandle = 0,
+export fn nemoBackendInit() c_int {
+    gpa = GeneralPurposeAllocator(.{}){};
 
-    quads: [Renderer.MaxQuads]Quad = undefined,
+    nemo_pool = DynamicPool(Nemo).init(gpa.allocator());
 
-    pub fn init(self: *Nemo) !void {
-        self.device = try mtl.Device.init();
-        try self.renderer.init(self.device, self.window);
-        self.texture = try self.renderer.textureNew(100, 100);
-
-        // init quads
-        for (&self.quads) |*quad| {
-            quad.color = Color.random();
-            var x: f32 = rnd.floatRange(f32, -10, 10);
-            var y: f32 = rnd.floatRange(f32, -10, 10);
-            var w: f32 = 1; //rnd.floatRange(f32, 0.1, 2);
-            var h: f32 = 1; //rnd.floatRange(f32, 0.1, 2);
-            quad.position = Vec3f.init(x, y, 0);
-            quad.width = w;
-            quad.height = h;
-        }
-    }
-
-    pub fn updateQuads(self: *Nemo) void {
-        for (&self.quads) |*quad| {
-            var x: f32 = rnd.floatRange(f32, -10, 10);
-            var y: f32 = rnd.floatRange(f32, -10, 10);
-            var w: f32 = 1; //rnd.floatRange(f32, 0.1, 2);
-            var h: f32 = 1; //rnd.floatRange(f32, 0.1, 2);
-            quad.position = Vec3f.init(x, y, 0);
-            quad.width = w;
-            quad.height = h;
-        }
-    }
-
-    pub fn frame(self: *Nemo) !void {
-        self.window.setClearColor(mtl.ClearColor.init(1, 1, 1, 1));
-
-        var camera = Camera.init(Vec3f.init(0, 0, 1), 10, 10, 0.1, 1000);
-        camera.updateMatrix();
-
-        //self.updateQuads();
-        try self.renderer.drawQuads(camera, self.quads[0..]);
-
-        //if (app.windowResized()) {
-        //    std.log.info("REIsized!!!!!!!!!!!!!!!!!!!!!!!!!", .{});
-        //}
-    }
-
-    pub fn deinit(self: *Nemo) !void {
-        self.device.deinit();
-    }
-
-    pub fn metalDevice(self: *Nemo) ?*mtl.Device {
-        return self.device;
-    }
-};
-
-var nemo = Nemo{};
-
-export fn nemoMetalDevice() ?*mtl.Device {
-    return nemo.metalDevice();
+    return 0;
 }
 
-export fn nemoInit(window: *Window) void {
-    nemo.window = window;
-    nemo.init() catch {
-        @panic("nemoInit panic");
+export fn nemoBackendDeinit() c_int {
+    nemo_pool.deinit();
+    _ = gpa.detectLeaks();
+    _ = gpa.deinit();
+
+    return 0;
+}
+
+export fn nemoBackendCreateInstance(window: *Window) u64 {
+    var handle = nemo_pool.alloc() catch return 0;
+    var instance: *Nemo = nemo_pool.get(handle).?;
+
+    instance.init(window) catch {
+        nemo_pool.free(handle);
+        return 0;
     };
+
+    return handle;
 }
 
-export fn nemoDeinit() void {
-    nemo.deinit() catch {
-        @panic("nemoDeinit panic");
-    };
+export fn nemoBackendDestroyInstance(handle: u64) void {
+    var instance: *Nemo = nemo_pool.get(handle).?;
+    instance.deinit();
+    nemo_pool.free(handle);
 }
 
-export fn nemoFrame() void {
-    nemo.frame() catch {
-        @panic("nemoFrame");
-    };
+export fn nemoGetMetalDevice(handle: u64) *mtl.Device {
+    var instance: *Nemo = nemo_pool.get(handle).?;
+    return instance.getMetalDevice();
 }
+
+export fn nemoFrame(handle: u64) c_int {
+    var instance: *Nemo = nemo_pool.get(handle).?;
+    instance.frame() catch {
+        return -1;
+    };
+
+    return 0;
+}
+
+test {}
