@@ -5,7 +5,7 @@ const Window = @import("window.zig").Window;
 const Self = @This();
 
 window: *Window = undefined,
-device: *mtl.Device = undefined,
+device: ?*mtl.Device = null,
 
 pub fn init(self: *Self, window: *Window) !void {
     self.window = window;
@@ -13,10 +13,15 @@ pub fn init(self: *Self, window: *Window) !void {
 }
 
 pub fn deinit(self: *Self) void {
-    self.device.deinit();
+    if (self.device != null) {
+        self.device.?.deinit();
+    }
 }
 
-pub fn getMetalDevice(self: *Self) *mtl.Device {
+pub fn getMetalDevice(self: *Self) ?*mtl.Device {
+    var name_buf: [64]u8 = undefined;
+    var name = self.device.?.name(&name_buf);
+    std.log.info("=======\n name = {s} \n ========\n", .{name});
     return self.device;
 }
 

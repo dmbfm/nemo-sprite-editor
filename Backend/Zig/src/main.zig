@@ -42,9 +42,13 @@ export fn nemoBackendDestroyInstance(handle: u64) void {
     nemo_pool.free(handle);
 }
 
-export fn nemoGetMetalDevice(handle: u64) *mtl.Device {
+export fn nemoGetMetalDevice(handle: u64) ?*mtl.Device {
+    std.log.info("A", .{});
     var instance: *Nemo = nemo_pool.get(handle).?;
-    return instance.getMetalDevice();
+    std.log.info("B", .{});
+    var result = instance.getMetalDevice();
+    std.log.info("{x}", .{@ptrToInt(result)});
+    return result;
 }
 
 export fn nemoFrame(handle: u64) c_int {

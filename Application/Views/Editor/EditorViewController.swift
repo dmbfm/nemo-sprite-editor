@@ -23,7 +23,9 @@ class EditorViewController : NSViewController {
         }
         
         self.editorView.controller = self
+        //self.editorView.device = MTLCreateSystemDefaultDevice()!
         self.nemoEditorWindow = NemoEditorWindow(view: self.editorView)
+        
     
         self.nemoInstanceHandle = nemoBackendCreateInstance(self.nemoEditorWindow.innerPtr())
         
@@ -31,6 +33,17 @@ class EditorViewController : NSViewController {
             fatalError("Failed to create NEMO instance!")
         }
         
+        let ptr = nemoGetMetalDevice(self.nemoInstanceHandle)!
+
+        
+        print("ptr description: \(ptr.debugDescription)")
+        
+        
+//        let x = ptr?.bindMemory(to:(any MTLDevice).self, capacity: 1)
+//        let device = x?.pointee
+//        print("Device name = \(device?.name)")
+        
+        //self.editorView.device = nemoGetMetalDevice(self.nemoInstanceHandle).bindMemory(to: MTLDevice.self, capacity: 1).pointee
     }
     
     deinit {
